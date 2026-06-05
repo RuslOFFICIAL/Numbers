@@ -6,18 +6,17 @@ There's written variables you can easily change of Windows version.
 Have fun reading my code. :3
 
 
-**Windows**
-Easily changeable variables in main code:
+Easily changeable variables in Windows main code:
 - `int maxNumber`, `bufferedStreamSize`, `arrayPoolSize`, `margin`, `internalStreamBuffer`, `fileArrayPoolSize`, `fileMargin`;
 - `string menuASCII`, `timestamp`, `targetDir`, `fileName`;
 
-Easily changeable in .csproj file:
+Easily changeable in Windows .csproj file:
 - `<AppVersion>`
 
-**Android**
-Easily changeable variables in main code:
+
+Easily changeable variables in Android main code:
 - `maxNumber`, `bufferedStreamSize`, `margin`, `internalStreamBuffer`, `fileArrayPoolSize`, `fileMargin`
 - `string timestamp`, `targetDir`, `fileName`;
 
-Easily changeable in .csproj file:
+Easily changeable in Android .csproj file:
 - `<ApplicationDisplayVersion>`, `<Version>`, `<ApplicationVersion>`;
