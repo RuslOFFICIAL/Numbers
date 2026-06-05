@@ -2,16 +2,16 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
 	    <LangVersion>13.0</LangVersion>
         <Nullable>enable</Nullable>
         <ApplicationIcon>Numbers_logo.ico</ApplicationIcon>
 		
 		<Product>Numbers</Product>
-		<AppVersion>1.0</AppVersion>
+		<AppVersion>1.0.1</AppVersion>
         <Version>$(AppVersion)</Version>
-		<AssemblyTitle>Simple-basic Windows program with Ukrainian localization to print every number from the number A to the number B (example: 1 2 3 4 5... 998 999 1000)</AssemblyTitle>
+		<AssemblyTitle>Numbers</AssemblyTitle>
         <Authors>Rusl</Authors>
 		<Company><![CDATA[R&C]]></Company>
 		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
