@@ -15,9 +15,9 @@
 		<Company><![CDATA[R&C]]></Company>
 	
 		<!--- Change the version of the program only here! -->
-		<ApplicationDisplayVersion>1.2.2</ApplicationDisplayVersion>
-		<Version>1.2.2</Version>
-		<ApplicationVersion>13</ApplicationVersion>
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<Version>1.0</Version>
+		<ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -9,7 +9,7 @@
         <ApplicationIcon>Numbers_logo.ico</ApplicationIcon>
 		
 		<Product>Numbers</Product>
-		<AppVersion>1.2.2</AppVersion>
+		<AppVersion>1.0</AppVersion>
         <Version>$(AppVersion)</Version>
 		<AssemblyTitle>Simple-basic Windows program with Ukrainian localization to print every number from the number A to the number B (example: 1 2 3 4 5... 998 999 1000)</AssemblyTitle>
         <Authors>Rusl</Authors>
