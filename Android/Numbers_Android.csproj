@@ -15,9 +15,9 @@
 		<Company><![CDATA[R&C]]></Company>
 	
 		<!--- Change the version of the program only here! <ApplicationVersion> always has to be changed by 1! -->
-		<ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
-		<Version>1.0.1</Version>
-		<ApplicationVersion>2</ApplicationVersion>
+		<ApplicationDisplayVersion>1.1.0</ApplicationDisplayVersion>
+		<Version>$(ApplicationDisplayVersion)</Version>
+		<ApplicationVersion>3</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">

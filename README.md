@@ -5,18 +5,10 @@ Originally made out of fun. :3
 There's written variables you can easily change of Windows version.
 Have fun reading my code. :3
 
+Some information about some port are in the file "README_(Platform).md" which is in the folder of the platform (e.g. "Windows").
 
-Easily changeable variables in Windows main code:
-- `int maxNumber`, `bufferedStreamSize`, `arrayPoolSize`, `margin`, `internalStreamBuffer`, `fileArrayPoolSize`, `fileMargin`;
-- `string menuASCII`, `timestamp`, `targetDir`, `fileName`;
-
-Easily changeable in Windows .csproj file:
-- `<AppVersion>`
-
-
-Easily changeable variables in Android main code:
-- `maxNumber`, `bufferedStreamSize`, `margin`, `internalStreamBuffer`, `fileArrayPoolSize`, `fileMargin`
-- `string timestamp`, `targetDir`, `fileName`;
-
-Easily changeable in Android .csproj file:
-- `<ApplicationDisplayVersion>`, `<Version>`, `<ApplicationVersion>`;
+About versions.
+From the version 1.1, in the version name can be up to three separated numbers and (e.g. N1.N2.N3-(Platform)).
+N1 means noticeable-big change for all platforms.
+N2 means small change for all platforms which can be noticed in the code.
+N3-(Platform) means the change only for some specific platform.
