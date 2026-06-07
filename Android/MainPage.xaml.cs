@@ -15,7 +15,7 @@ namespace Numbers_Android
         // Set variables
         private readonly int maxNumber = 10000000; // Changing the value of maxNumber may affect the performance of the program! 
         
-        private string GetVersionFromProject()
+        private static string GetVersionFromProject()
         {
             // Change the version of the program only in Numbers_Android.csproj!
             var assembly = Assembly.GetExecutingAssembly();

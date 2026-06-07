@@ -15,9 +15,9 @@
 		<Company><![CDATA[R&C]]></Company>
 	
 		<!--- Change the version of the program only here! <ApplicationVersion> always has to be changed by 1! -->
-		<ApplicationDisplayVersion>1.1.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.1.1-Android</ApplicationDisplayVersion>
 		<Version>$(ApplicationDisplayVersion)</Version>
-		<ApplicationVersion>3</ApplicationVersion>
+		<ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
