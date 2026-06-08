@@ -7,10 +7,14 @@
 	    <LangVersion>13.0</LangVersion>
         <Nullable>enable</Nullable>
         <ApplicationIcon>Numbers_logo.ico</ApplicationIcon>
+		<PlatformString>Windows</PlatformString>
+
+		<!--- Change the version of the program only here! <VersionOnly> have to be either 1 (as true) or 0 (as false)! -->
+		<AppVersion>2.0.0</AppVersion>
+		<Version>$(AppVersion)</Version>
+		<VersionOnly>0</VersionOnly>
 		
 		<Product>Numbers</Product>
-		<AppVersion>1.1.0</AppVersion>
-        <Version>$(AppVersion)</Version>
 		<AssemblyTitle>Numbers</AssemblyTitle>
         <Authors>Rusl</Authors>
 		<Company><![CDATA[R&C]]></Company>
@@ -21,6 +25,8 @@
 	<ItemGroup>
         <Content Include="Numbers_logo.ico" />
 		<AssemblyMetadata Include="AppVersion" Value="$(AppVersion)" />
+		<AssemblyMetadata Include="VersionOnly" Value="$(VersionOnly)" />
+		<AssemblyMetadata Include="PlatformString" Value="$(PlatformString)" />
     </ItemGroup>
 
 </Project>

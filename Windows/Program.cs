@@ -21,12 +21,24 @@ namespace Numbers_Windows
             // Set variables.
             int maxNumber = 100000000; // Changing the value of maxNumber may affect the performance of the program!
             int chosenNumber;
-            var version = Assembly.GetExecutingAssembly()
-                .GetCustomAttributes<AssemblyMetadataAttribute>()
-                .FirstOrDefault(a => a.Key == "AppVersion")?.Value ?? "Unknown";
             string menuASCII = " _______                      ___.                               \r\n \\      \\    __ __    _____   \\_ |__     ____   _______    ______\r\n /   |   \\  |  |  \\  /     \\   | __ \\  _/ __ \\  \\_  __ \\  /  ___/\r\n/    |    \\ |  |  / |  Y Y  \\  | \\_\\ \\ \\  ___/   |  | \\/  \\___ \\ \r\n\\____|__  / |____/  |__|_|  /  |___  /  \\___  >  |__|    /____  >\r\n        \\/                \\/       \\/       \\/                \\/ ";
+            var attributes = Assembly.GetExecutingAssembly()
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
+                .ToDictionary(a => a.Key, a => a.Value);
+            var versionNumber = attributes.GetValueOrDefault("AppVersion", "Unknown");
+            var versionOnly = attributes.GetValueOrDefault("VersionOnly", "Unknown");
+            var platform = attributes.GetValueOrDefault("PlatformString", "Unknown");
 
-            Console.WriteLine($"{menuASCII}\nVersion {version} Windows\n\n");
+
+            // Version.
+            string versionOnlyString = versionOnly switch
+            {
+                "1" => $"-{platform}",
+                "0" => "",
+                _ => "-Unknown"
+            };
+            string version = $"{versionNumber}{versionOnlyString}";
+            Console.WriteLine($"{menuASCII}\nVersion {version}\n\n");
 
             // Insert number.
             Console.Write($"Введіть число (повинно бути в діапазоні від 1 до {maxNumber:N0}): ");

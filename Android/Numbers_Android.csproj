@@ -7,17 +7,19 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<PlatformString>Android</PlatformString>
+
+		<!--- Change the version of the program only here! <ApplicationVersion> always has to be changed by 1! <VersionOnly> have to be either 1 (as true) or 0 (as false)! -->
+		<ApplicationDisplayVersion>2.0.0</ApplicationDisplayVersion>
+		<Version>$(ApplicationDisplayVersion)</Version>
+		<ApplicationVersion>5</ApplicationVersion>
+		<VersionOnly>0</VersionOnly>
 
 		<ApplicationTitle>Numbers</ApplicationTitle>
 		<ApplicationId>io.randc.numbers</ApplicationId>
 		<AssemblyTitle>Numbers</AssemblyTitle>
 		<Authors>Rusl</Authors>
 		<Company><![CDATA[R&C]]></Company>
-	
-		<!--- Change the version of the program only here! <ApplicationVersion> always has to be changed by 1! -->
-		<ApplicationDisplayVersion>1.1.1-Android</ApplicationDisplayVersion>
-		<Version>$(ApplicationDisplayVersion)</Version>
-		<ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -27,6 +29,8 @@
 
 	<ItemGroup>
 		<AssemblyMetadata Include="ApplicationDisplayVersion" Value="$(ApplicationDisplayVersion)" />
+		<AssemblyMetadata Include="VersionOnly" Value="$(VersionOnly)" />
+		<AssemblyMetadata Include="PlatformString" Value="$(PlatformString)" />
 	</ItemGroup>
 		
 	

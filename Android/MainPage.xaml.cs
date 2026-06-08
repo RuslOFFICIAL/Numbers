@@ -15,20 +15,28 @@ namespace Numbers_Android
         // Set variables
         private readonly int maxNumber = 10000000; // Changing the value of maxNumber may affect the performance of the program! 
         
-        private static string GetVersionFromProject()
-        {
-            // Change the version of the program only in Numbers_Android.csproj!
-            var assembly = Assembly.GetExecutingAssembly();
-            var metadata = assembly.GetCustomAttributes<AssemblyMetadataAttribute>();
-            return metadata.FirstOrDefault(m => m.Key == "ApplicationDisplayVersion")?.Value ?? "Unknown";
-        }
 
         public MainPage()
         {
-
             InitializeComponent();
-            string version = GetVersionFromProject();
-            
+
+            // Set variables.
+            var attributes = Assembly.GetExecutingAssembly()
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
+                .ToDictionary(a => a.Key, a => a.Value);
+            var versionNumber = attributes.GetValueOrDefault("ApplicationDisplayVersion", "Unknown");
+            var versionOnly = attributes.GetValueOrDefault("VersionOnly", "Unknown");
+            var platform = attributes.GetValueOrDefault("PlatformString", "Unknown");
+
+            // Version.
+            string versionOnlyString = versionOnly switch
+            {
+                "1" => $"-{platform}",
+                "0" => "",
+                _ => "-Unknown"
+            };
+            string version = $"{versionNumber}{versionOnlyString}";
+
             // Print text.
             WriteLine($"Version {version} Android\n\n");
             WriteLine($"Введіть число (повинно бути в діапазоні від 1 до {maxNumber:N0}): ");
