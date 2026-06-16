@@ -5,4 +5,4 @@ Changeable variables in the "MainPage.xaml.cs" file:
 - `string timestamp`, `targetDir`, `fileName`;
 
 Changeable in Android "Numbers_Android.csproj" file:
-- `<ApplicationDisplayVersion>`, `<Version>`, `<ApplicationVersion>`;
+- `<ApplicationDisplayVersion>`, `<ApplicationVersion>`, `<VersionOnly>`;

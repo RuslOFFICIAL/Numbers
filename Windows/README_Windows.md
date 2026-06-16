@@ -5,4 +5,4 @@ Changeable variables in the "Program.cs" file:
 - `string menuASCII`, `timestamp`, `targetDir`, `fileName`;
 
 Changeable variables in the "Numbers_Windows.csproj" file:
-- `<AppVersion>`
+- `<AppVersion>`, `<VersionOnly>`;
