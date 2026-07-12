@@ -124,7 +124,7 @@
     <value>Creando la carpeta "{targetDir}"...</value>
   </data>
   <data name="CreatingDirectorySuccessPrompt" xml:space="preserve">
-    <value>¡Carpeta creada exitosamente! </value>
+    <value>¡Carpeta creada con éxito! </value>
   </data>
   <data name="EnterNumberAgainPrompt" xml:space="preserve">
     <value>Ingrese un número: </value>
@@ -148,7 +148,7 @@
     <value>\nPresione [Intro] para cerrar la aplicación...</value>
   </data>
   <data name="SaveFileCancelledPrompt" xml:space="preserve">
-    <value>Grabación cancelada.</value>
+    <value>Guardado cancelado.</value>
   </data>
   <data name="SaveFileChoicePrompt" xml:space="preserve">
     <value>¿Guardar estos números en el archivo "{fileName}"? </value>
@@ -157,7 +157,7 @@
     <value>\n\nY/yes = Escribir en archivo | Otra tecla = No escribir</value>
   </data>
   <data name="SaveFileProcessPrompt" xml:space="preserve">
-    <value>Entrada de archivo...</value>
+    <value>Escribiendo en el archivo...</value>
   </data>
   <data name="WrongNumberPrompt" xml:space="preserve">
     <value>El número no es válido (debe estar en el rango 1 a {maxNumber:N0}). Intente de nuevo.</value>
