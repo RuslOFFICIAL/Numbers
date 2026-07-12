@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq;
+using Numbers_Windows.Resources;
 
 namespace Numbers_Windows
 {
@@ -14,7 +15,14 @@ namespace Numbers_Windows
     {
         public static async Task Main(string[] _)
         {
-            // Localization.
+            // User culture.
+            System.Globalization.CultureInfo currentCulture = System.Globalization.CultureInfo.CurrentUICulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = currentCulture;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = currentCulture;
+            System.Globalization.CultureInfo.DefaultThreadCurrentCulture = currentCulture;
+            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = currentCulture;
+
+            // UI setup.
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
 
@@ -41,12 +49,12 @@ namespace Numbers_Windows
             Console.WriteLine($"{menuASCII}\nVersion {version}\n\n");
 
             // Insert number.
-            Console.Write($"Введіть число (повинно бути в діапазоні від 1 до {maxNumber:N0}): ");
+            Console.Write(Strings.EnterNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
 
             while (!int.TryParse(Console.ReadLine(), out chosenNumber) || chosenNumber < 1 || chosenNumber > maxNumber)
             {
-                Console.WriteLine($"Число не підходить (повинно бути в діапазоні від 1 до {maxNumber:N0}). Спробуйте знову.");
-                Console.Write("Введіть число: ");
+                Console.WriteLine(Strings.WrongNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
+                Console.Write(Strings.EnterNumberAgainPrompt);
             }
 
             // Launching other processes.
@@ -54,13 +62,13 @@ namespace Numbers_Windows
             await CreateFileAsync(chosenNumber);
 
             // End.
-            Console.WriteLine("\nНатисніть [Enter] щоб закрити програму...");
+            Console.WriteLine(Strings.PressEnterPrompt.Replace("\\n", Environment.NewLine));
             Console.ReadLine();
         }
 
         private static async Task ProcessNumbersAsync(int chosenNumber)
         {
-            Console.WriteLine("\nГенерація та вивід чисел у консоль. Зачекайте...");
+            Console.WriteLine(Strings.GenerationAndOutputPrompt.Replace("\\n", Environment.NewLine));
 
             // Buffer.
             int bufferedStreamSize = 1048576; // 1 MB.
@@ -214,10 +222,12 @@ namespace Numbers_Windows
             Console.WriteLine(separator);
 
             // Make file.
-            Console.WriteLine($"Розмір файлу: {fileSizeInBytes:N0} байт ({fileSizeInMB:F2} MB)");
-            Console.WriteLine($"Файл буде збережено в {targetDir}");
-            Console.WriteLine("\n\nY/yes = Записати у файл | Інша клавіша = Не записувати");
-            Console.Write($"Зберегти ці числа у файл {fileName}? ");
+            Console.WriteLine(Strings.FileSizePrompt
+                .Replace("{fileSizeInBytes:N0}", fileSizeInBytes.ToString("N0"))
+                .Replace("{fileSizeInMB:F2}", fileSizeInMB.ToString("F2")));
+            Console.WriteLine(Strings.FileDirectoryPrompt.Replace("{targetDir}", targetDir));
+            Console.WriteLine(Strings.SaveFileOptionsPrompt.Replace("\\n", Environment.NewLine));
+            Console.Write(Strings.SaveFileChoicePrompt.Replace("{fileName}", fileName));
             string fileResponse = Console.ReadLine()?.Trim().ToLower() ?? "";
 
             // Choice.
@@ -226,20 +236,26 @@ namespace Numbers_Windows
                 // Creating directory and file.
                 try
                 {
-                    Console.WriteLine($"Створення папки {targetDir}...");
-                    Directory.CreateDirectory(targetDir);
-                    Console.WriteLine("Папка успішно створена! Запис у файл...");
-                    await WriteToFileAsync(filePath, chosenNumber);
-                    Console.WriteLine($"Успішно збережено! Шлях до файлу:\n{filePath}");
+                    if (!Directory.Exists(targetDir))
+                    {
+                        Console.WriteLine(Strings.CreatingDirectoryPrompt.Replace("{targetDir}", targetDir));
+                        Directory.CreateDirectory(targetDir);
+                        Console.Write(Strings.CreatingDirectorySuccessPrompt);
+                    }
+                    Console.WriteLine(Strings.SaveFileProcessPrompt);
+                    await Task.Run(() => WriteToFileAsync(filePath, chosenNumber));
+                    Console.WriteLine(Strings.FilePathPrompt
+                        .Replace("{filePath}", filePath)
+                        .Replace("\\n", Environment.NewLine));
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Помилка при роботі з файловою системою: {ex.Message}");
+                    Console.WriteLine(Strings.CreatingDirectoryErrorPrompt.Replace("{ex.Message}", ex.Message));
                 }
             }
             else
             {
-                Console.WriteLine("Запис скасовано.");
+                Console.WriteLine(Strings.SaveFileCancelledPrompt);
             }
         }
     }

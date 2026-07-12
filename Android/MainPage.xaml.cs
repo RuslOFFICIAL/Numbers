@@ -7,17 +7,23 @@ using System.Reflection;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Numbers_Android.Resources;
 
 namespace Numbers_Android
 {
     public partial class MainPage : ContentPage
     {
+
         // Set variables
         private readonly int maxNumber = 10000000; // Changing the value of maxNumber may affect the performance of the program! 
-        
 
         public MainPage()
         {
+            // User culture.
+            System.Globalization.CultureInfo currentCulture = System.Globalization.CultureInfo.CurrentUICulture;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = currentCulture;
+            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = currentCulture;
+
             InitializeComponent();
 
             // Set variables.
@@ -39,9 +45,8 @@ namespace Numbers_Android
 
             // Print text.
             WriteLine($"Version {version} Android\n\n");
-            WriteLine($"Введіть число (повинно бути в діапазоні від 1 до {maxNumber:N0}): ");
+            WriteLine(Strings.EnterNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
         }
-
         private void WriteLine(string text)
         {
             //Console.WriteLine() command.
@@ -72,8 +77,8 @@ namespace Numbers_Android
 
             if (!int.TryParse(userInput, out int chosenNumber) || chosenNumber < 1 || chosenNumber > maxNumber)
             {
-                WriteLine($"Число не підходить (повинно бути в діапазоні від 1 до {maxNumber:N0}). Спробуйте знову.");
-                WriteLine("Введіть число: ");
+                WriteLine(Strings.WrongNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
+                WriteLine(Strings.EnterNumberAgainPrompt);
                 return;
             }
 
@@ -86,12 +91,12 @@ namespace Numbers_Android
             await CreateFileAsync(chosenNumber);
 
             TerminalInput.IsEnabled = true;
-            WriteLine("\nГотово! Введіть наступне число для нового циклу:");
+            WriteLine(Strings.NewCyclePrompt.Replace("\\n", Environment.NewLine));
         }
 
         private async Task ProcessNumbersAsync(int chosenNumber)
         {
-            WriteLine("\nГенерація та вивід чисел у консоль. Зачекайте...");
+            WriteLine(Strings.GenerationAndOutputPrompt.Replace("\\n", Environment.NewLine));
 
             // Buffer.
             int bufferedStreamSize = 1048576; // 1 MB.
@@ -114,7 +119,9 @@ namespace Numbers_Android
                         if (consolePos >= actualLength - margin)
                         {
                             string chunk = Encoding.UTF8.GetString(pooledBuffer, 0, consolePos);
-                            WriteInline(chunk);
+                            MainThread.BeginInvokeOnMainThread(() => {
+                                TerminalOutput.Text += chunk;
+                            });
                             consolePos = 0;
                         }
 
@@ -229,26 +236,42 @@ namespace Numbers_Android
             double fileSizeInMB = fileSizeInBytes / (1024.0 * 1024.0);
 
             // Choice.
-            bool shouldSave = await DisplayAlert("Зберегти файл?", $"Розмір файлу: {fileSizeInBytes:N0} байт ({fileSizeInMB:F2} MB)\nФайл буде збережено в {targetDir}\nЗберегти ці числа у файл {fileName}?", "Так", "Ні");
+            bool shouldSave = await DisplayAlert
+                (Strings.SaveFilePrompt,
+                Strings.FileSizePrompt
+                    .Replace("{fileSizeInBytes:N0}", fileSizeInBytes.ToString("N0"))
+                    .Replace("{fileSizeInMB:F2}", fileSizeInMB.ToString("F2")) +
+                Strings.FileDirectoryPrompt.Replace("{targetDir}", targetDir) +
+                Strings.SaveFileChoicePrompt.Replace("{fileName}", fileName),
+                Strings.YesPrompt,
+                Strings.NoPrompt);
             if (shouldSave)
             {
                 try
                 {
-                    WriteLine($"Створення папки {targetDir}...");
-                    Directory.CreateDirectory(targetDir);
-                    WriteLine("Запис у файл...");
-                    await WriteToFileAsync(filePath, chosenNumber);
-                    WriteLine($"Успішно збережено! Шлях до файлу:\n{filePath}");
+                    if (!Directory.Exists(targetDir))
+                    {
+                        WriteLine(Strings.CreatingDirectoryPrompt.Replace("{targetDir}", targetDir));
+                        Directory.CreateDirectory(targetDir);
+                        WriteInline(Strings.CreatingDirectorySuccessPrompt);
+                    }
+                    WriteLine(Strings.SaveFileProcessPrompt);
+                    await Task.Run(() => WriteToFileAsync(filePath, chosenNumber));
+                    WriteLine(Strings.FilePathPrompt
+                        .Replace("{filePath}", filePath)
+                        .Replace("\\n", Environment.NewLine));
                 }
                 catch (Exception ex)
                 {
-                    WriteLine($"Помилка при роботі з файловою системою: {ex.Message}");
-                    WriteLine($"Спробуйте надати програмі Numbers дозвіл на доступ до усіх файлів.");
+                    WriteLine(Strings.CreatingDirectoryErrorPrompt
+                        .Replace("{ex.Message}", ex.Message)
+                        .Replace("\\n", Environment.NewLine));
+                    WriteLine(Strings.ErrorAccessPrompt);
                 }
             }
             else
             {
-                WriteLine("Запис скасовано.");
+                WriteLine(Strings.SaveFileCancelledPrompt);
             }
         }
     }

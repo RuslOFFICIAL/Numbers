@@ -10,10 +10,11 @@
 		<PlatformString>Android</PlatformString>
 
 		<!--- Change the version of the program only here! <ApplicationVersion> always has to be changed by 1! <VersionOnly> have to be either 1 (as true) or 0 (as false)! -->
-		<ApplicationDisplayVersion>2.0.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>3.0.0</ApplicationDisplayVersion>
 		<Version>$(ApplicationDisplayVersion)</Version>
-		<ApplicationVersion>5</ApplicationVersion>
+		<ApplicationVersion>6</ApplicationVersion>
 		<VersionOnly>0</VersionOnly>
+		<NeutralLanguage>en-US</NeutralLanguage>
 
 		<ApplicationTitle>Numbers</ApplicationTitle>
 		<ApplicationId>io.randc.numbers</ApplicationId>
@@ -32,12 +33,27 @@
 		<AssemblyMetadata Include="VersionOnly" Value="$(VersionOnly)" />
 		<AssemblyMetadata Include="PlatformString" Value="$(PlatformString)" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Resources\Localization\Strings.resx">
+			<SubType>Designer</SubType>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<CustomToolNamespace>Numbers_Android.Resources</CustomToolNamespace>
+			<LastGenOutput>Strings.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\Localization\Strings.uk.resx">
+			<Generator></Generator>
+			<CustomToolNamespace>Numbers_Android.Resources</CustomToolNamespace>
+		</EmbeddedResource>
+	</ItemGroup>
 		
 	
 	<PropertyGroup>
 		<TargetFrameworks>net9.0-android</TargetFrameworks>
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
 		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 		<LangVersion>13.0</LangVersion>
+		<SelfContained>true</SelfContained>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
@@ -58,13 +74,12 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
-	  <AndroidKeyStore>False</AndroidKeyStore>
 	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
-	  <AndroidKeyStore>False</AndroidKeyStore>
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	  <DebugSymbols>True</DebugSymbols>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -88,6 +103,14 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Resources\Localization\Strings.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Strings.resx</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>
