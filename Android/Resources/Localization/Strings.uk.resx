@@ -142,7 +142,7 @@
     <value>Розмір файлу: {fileSizeInBytes:N0} байт ({fileSizeInMB:F2} MB). </value>
   </data>
   <data name="GenerationAndOutputPrompt" xml:space="preserve">
-    <value>\nГенерація та вивід чисел у консоль. Зачекайте...</value>
+    <value>\nГенерація та вивід чисел у консоль. Будь ласка, зачекайте...</value>
   </data>
   <data name="SaveFileCancelledPrompt" xml:space="preserve">
     <value>Запис скасовано.</value>
