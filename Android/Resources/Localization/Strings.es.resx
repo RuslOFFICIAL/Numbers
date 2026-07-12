@@ -142,7 +142,7 @@
     <value>Tamaño del archivo: {fileSizeInBytes:N0} bytes ({fileSizeInMB:F2} MB)</value>
   </data>
   <data name="GenerationAndOutputPrompt" xml:space="preserve">
-    <value>\nGeneración y salida de números a la consola. Por favor espere...</value>
+    <value>\nGeneración y salida de números a la consola. Espere por favor...</value>
   </data>
   <data name="SaveFileCancelledPrompt" xml:space="preserve">
     <value>Grabación cancelada.</value>
