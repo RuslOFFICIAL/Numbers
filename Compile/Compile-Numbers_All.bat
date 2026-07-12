@@ -1,17 +1,6 @@
 @echo off
 cd /d "%~dp0"
 
-REM Variables.
-set "ReleasesFolder=%~dp0..\Releases"
-
-REM Cleaning Releases folder.
-echo Cleaning "%ReleasesFolder%"...
-for %%f in ("%ReleasesFolder%\*.*") do (
-	echo Removing file: "%%~nxf"
-	del "%%f" /f /q
-)
-echo.
-
 REM Running files.
 for %%f in ("%~dp0*.bat") do (
     if not "%%~nxf"=="%~nx0" (

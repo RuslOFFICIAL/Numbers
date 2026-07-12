@@ -9,6 +9,14 @@ set "FileDirectory=%SourceDirectory%\bin\Release\net9.0-android\publish"
 set "CsprojPath=%SourceDirectory%\Numbers_Android.csproj"
 set "AndroidKeystorePath=%~dp0..\..\..\..\Android Keystore"
 
+REM Removing other APK files.
+echo Deleting old APK files...
+for %%f in ("%DestinationDirectory%\Numbers_*_Android.apk") do (
+	echo Removing file: "%%~nxf"...
+	del "%%f" /f /q
+)
+echo.
+
 REM Load configuration from text file.
 for /f "tokens=1,2 delims==" %%a in ("%AndroidKeystore%\SignatureInfo_1.md") do (
 	if "%%a"=="alias" set "KeyAlias=%%b"

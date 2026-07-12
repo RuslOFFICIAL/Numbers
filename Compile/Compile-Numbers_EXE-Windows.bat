@@ -7,6 +7,14 @@ set "SourceDirectory=%~dp0..\Windows"
 set "DestinationDirectory=%~dp0..\Releases"
 set "FileDirectory=%SourceDirectory%\bin\Release\net9.0\win-x64\publish"
 
+REM Removing other EXE files.
+echo Deleting old EXE files...
+for %%f in ("%DestinationDirectory%\Numbers_*_Windows.exe") do (
+	echo Removing file: "%%~nxf"...
+	del "%%f" /f /q
+)
+echo.
+
 REM Change to the directory containing project file (.csproj)
 cd /d %SourceDirectory%
 
