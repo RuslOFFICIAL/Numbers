@@ -7,9 +7,10 @@ set "SourceDirectory=%~dp0..\Android"
 set "DestinationDirectory=%~dp0..\Releases"
 set "FileDirectory=%SourceDirectory%\bin\Release\net9.0-android\publish"
 set "CsprojPath=%SourceDirectory%\Numbers_Android.csproj"
+set "AndroidKeystorePath=%~dp0..\..\..\..\Android Keystore"
 
 REM Load configuration from text file.
-for /f "tokens=1,2 delims==" %%a in ("%~dp0\SignatureInfo.md") do (
+for /f "tokens=1,2 delims==" %%a in ("%AndroidKeystore%\SignatureInfo_1.md") do (
 	if "%%a"=="alias" set "KeyAlias=%%b"
 	if "%%a"=="storepass" set "KeyStorePass=%%b"
 	if "%%a"=="keypass" set "KeyKeyPass=%%b"
@@ -21,7 +22,7 @@ cd /d %SourceDirectory%
 REM Run the publish command.
 echo Compiling Android APK...
 dotnet publish -f net9.0-android -c Release -p:AndroidPackageFormat=apk ^
-	-p:AndroidSigningKeyStore="%~dp0..\..\..\..\Android Keystore\RAndC_key.keystore" ^
+	-p:AndroidSigningKeyStore="%AndroidKeystorePath%\RAndC_key.keystore" ^
 	-p:AndroidSigningKeyAlias="%KeyAlias%" ^
 	-p:AndroidSigningKeyPass="%KeyKeyPass%" ^
 	-p:AndroidSigningStorePass="%KeyStorePass%"
