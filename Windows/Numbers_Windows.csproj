@@ -39,6 +39,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Localization\Strings.es.resx">
+	    <Generator></Generator>
+	    <CustomToolNamespace>Numbers_Windows.Resources</CustomToolNamespace>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Resources\Localization\Strings.uk.resx">
 	    <Generator></Generator>
 	    <CustomToolNamespace>Numbers_Windows.Resources</CustomToolNamespace>
