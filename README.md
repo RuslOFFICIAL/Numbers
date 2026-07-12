@@ -5,8 +5,6 @@ Originally made out of fun. :3
 There's written variables you can easily change of Windows version.
 Have fun reading my code. :3
 
-Some information about some port are in the file "README_(Platform).md" which is in the folder of the platform (e.g. "Windows").
-
 About versions.
 From the version 1.1, in the version name can be up to three separated numbers and with the platform name (e.g. N1.N2.N3-(Platform)).
 - N1 means a noticeable-big change for all platforms.
