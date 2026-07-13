@@ -89,8 +89,9 @@ namespace Numbers_Windows
             int bufferedStreamSize = 1048576; // 1 MB.
             int arrayPoolSize = 65536; // 64 KB.
             int displayLimit = 10000; // Only show first #### numbers in UI.
-			int count = 0; 
-            await Task.Run(() =>
+			int count = 0;
+			bool isTruncated = false;
+			await Task.Run(() =>
             {
 				using Stream rawStdout = Console.OpenStandardOutput();
                 using BufferedStream stdout = new(rawStdout, bufferedStreamSize);
@@ -138,6 +139,7 @@ namespace Numbers_Windows
 										consolePos = 0;
 										byte[] msg = Encoding.UTF8.GetBytes(Strings.OutputTruncatedPrompt);
 										stdout.Write(msg);
+										isTruncated = true;
 										return;
 									}
 
@@ -154,7 +156,7 @@ namespace Numbers_Windows
                                 throw new ArgumentException(Strings.InvalidNumberPrompt);
                         }
 
-                        if (consolePos > 0)
+                        if (!isTruncated && consolePos > 0)
                         {
                             stdout.Write(consoleSpan[..consolePos]);
                         }
