@@ -115,6 +115,15 @@ namespace Numbers_Android.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error: Permission to write to storage was denied..
+        /// </summary>
+        public static string ErrorPermissionPrompt {
+            get {
+                return ResourceManager.GetString("ErrorPermissionPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The file will be saved in &quot;{targetDir}&quot;. .
         /// </summary>
         public static string FileDirectoryPrompt {
@@ -273,6 +282,15 @@ namespace Numbers_Android.Resources {
         public static string SaveFilePrompt {
             get {
                 return ResourceManager.GetString("SaveFilePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version {version} Android\n\n.
+        /// </summary>
+        public static string VersionPrompt {
+            get {
+                return ResourceManager.GetString("VersionPrompt", resourceCulture);
             }
         }
         

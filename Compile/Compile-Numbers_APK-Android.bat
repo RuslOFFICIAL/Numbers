@@ -7,11 +7,15 @@ set "SourceDirectory=%~dp0..\Android"
 set "DestinationDirectory=%~dp0..\Releases"
 set "FileDirectory=%SourceDirectory%\bin\Release\net9.0-android\publish"
 set "CsprojPath=%SourceDirectory%\Numbers_Android.csproj"
-set "AndroidKeystorePath=%~dp0..\..\..\..\Android Keystore"
+set "AndroidKeystorePath=%~dp0..\..\..\Android Keystore"
 
 REM Removing other APK files.
 echo Deleting old APK files...
 for %%f in ("%DestinationDirectory%\Numbers_*_Android.apk") do (
+	echo Removing file: "%%~nxf"...
+	del "%%f" /f /q
+)
+for %%f in ("%FileDirectory%\Numbers_*_Android.apk") do (
 	echo Removing file: "%%~nxf"...
 	del "%%f" /f /q
 )

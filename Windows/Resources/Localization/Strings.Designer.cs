@@ -205,6 +205,15 @@ namespace Numbers_Windows.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ... (Output truncated for performance).
+        /// </summary>
+        internal static string OutputTruncatedPrompt {
+            get {
+                return ResourceManager.GetString("OutputTruncatedPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to \nPress [Enter] to close the app....
         /// </summary>
         internal static string PressEnterPrompt {
@@ -246,6 +255,15 @@ namespace Numbers_Windows.Resources {
         internal static string SaveFileProcessPrompt {
             get {
                 return ResourceManager.GetString("SaveFileProcessPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {menuASCII}\nVersion {version}\n\n.
+        /// </summary>
+        internal static string VersionPrompt {
+            get {
+                return ResourceManager.GetString("VersionPrompt", resourceCulture);
             }
         }
         

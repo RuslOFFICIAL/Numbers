@@ -17,7 +17,7 @@ namespace Numbers_Android
     {
 
         // Set variables
-        private readonly int maxNumber = 10000000; // Changing the value of maxNumber may affect the performance of the program! 
+        private readonly int maxNumber = 100000000; // Changing the value of maxNumber may affect the performance of the program! 
         private int chosenNumber;
         private int methodNumber;
         private bool awaitingMethod = true;
@@ -50,7 +50,9 @@ namespace Numbers_Android
             string version = $"{versionNumber}{versionOnlyString}";
 
             // Print text.
-            WriteLine($"Version {version} Android\n\n");
+            WriteLine(Strings.VersionPrompt
+                .Replace("\\n", Environment.NewLine)
+                .Replace("{version}", version));
             WriteLine(Strings.LanguageOptionsPrompt
                 .Replace("\\n", Environment.NewLine)
                 .Replace("\\t", Constants.ConsoleTab));
@@ -165,12 +167,21 @@ namespace Numbers_Android
             {
                 StringBuilder sb = new();
                 int bufferedStreamSize = 1048576; // 1 MB.
+                int displayLimit = 10000; // Only show first #### numbers in UI.
 
-                switch (methodNumber)
+				switch (methodNumber)
                 {
                     case 1: // Ascending.
                         for (int i = 1; i <= chosenNumber; i++)
                         {
+							if (i > displayLimit)
+                            {
+								FlushToUI(sb.ToString());
+								WriteLine(Strings.OutputTruncatedPrompt);
+								sb.Clear();
+								break;
+							}
+
                             sb.Append(i).Append(i == chosenNumber ? "" : " ");
                             if (sb.Length > bufferedStreamSize)
                             {
@@ -180,14 +191,24 @@ namespace Numbers_Android
                         }
                         break;
                     case 2: // Descending.
-                        for (int i = chosenNumber; i >= 1; i--)
+						int count = 0;
+						for (int i = chosenNumber; i >= 1; i--)
                         {
-                            sb.Append(i).Append(i == 1 ? "" : " ");
-                            if (sb.Length > bufferedStreamSize)
+                            if (count > displayLimit)
                             {
                                 FlushToUI(sb.ToString());
+                                WriteLine(Strings.OutputTruncatedPrompt);
                                 sb.Clear();
+                                break;
                             }
+                            
+                            sb.Append(i).Append(i == 1 ? "" : " ");
+                            count++;
+                            if (sb.Length > bufferedStreamSize)
+                                {
+                                    FlushToUI(sb.ToString());
+                                    sb.Clear();
+                                }
                         }
                         break;
                     default:
@@ -306,8 +327,8 @@ namespace Numbers_Android
             string targetDir = "/storage/emulated/0/R&C/Numbers/";
             string fileName = methodNumber switch
             {
-                1 => $"Numbers-Result_{chosenNumber}-Ascending_{timestamp}.txt",
-                2 => $"Numbers-Result_{chosenNumber}-Descending_{timestamp}.txt",
+                1 => $"Numbers-Android_Result_{chosenNumber}-Ascending_{timestamp}.txt",
+                2 => $"Numbers-Android_Result_{chosenNumber}-Descending_{timestamp}.txt",
                 _ => throw new ArgumentException(Strings.InvalidNumberPrompt),
             };
             string filePath = Path.Combine(targetDir, fileName);
@@ -342,7 +363,7 @@ namespace Numbers_Android
                         }
                         if (status != PermissionStatus.Granted)
                         {
-                            WriteLine("Error: Permission to write to storage was denied.");
+                            WriteLine(Strings.ErrorPermissionPrompt);
                             return;
                         }
 

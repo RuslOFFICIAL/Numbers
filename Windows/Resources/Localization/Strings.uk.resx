@@ -165,6 +165,9 @@
   <data name="MethodChoiceWrongPrompt" xml:space="preserve">
     <value>Число не підходить (повинно бути в діапазоні від 1 до 2). Спробуйте знову.\nВведіть число: </value>
   </data>
+  <data name="OutputTruncatedPrompt" xml:space="preserve">
+    <value>... (Вивід скорочено для продуктивності)</value>
+  </data>
   <data name="PressEnterPrompt" xml:space="preserve">
     <value>\nНатисніть [Enter] щоб закрити програму...</value>
   </data>
@@ -179,6 +182,9 @@
   </data>
   <data name="SaveFileProcessPrompt" xml:space="preserve">
     <value>Запис у файл...</value>
+  </data>
+  <data name="VersionPrompt" xml:space="preserve">
+    <value>{menuASCII}\nVersion {version}\n\n</value>
   </data>
   <data name="WrongNumberPrompt" xml:space="preserve">
     <value>Число не підходить (повинно бути в діапазоні від 1 до {maxNumber:N0}). Спробуйте знову.</value>

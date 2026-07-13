@@ -195,4 +195,10 @@
   <data name="LanguageOptionsPrompt" xml:space="preserve">
     <value>-&gt;\tEN - English\n\tES - Español\n\tUK - Українська</value>
   </data>
+  <data name="ErrorPermissionPrompt" xml:space="preserve">
+    <value>Error: Permission to write to storage was denied.</value>
+  </data>
+  <data name="VersionPrompt" xml:space="preserve">
+    <value>Version {version} Android\n\n</value>
+  </data>
 </root>

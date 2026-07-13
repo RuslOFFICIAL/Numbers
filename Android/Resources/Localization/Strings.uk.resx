@@ -181,7 +181,7 @@
     <value>Число не підходить (повинно бути в діапазоні від 1 до 2). Спробуйте знову.\nВведіть число: </value>
   </data>
   <data name="OutputTruncatedPrompt" xml:space="preserve">
-    <value>... (Вивід скорочено для продуктивності</value>
+    <value>... (Вивід скорочено для продуктивності)</value>
   </data>
   <data name="LanguageSettingPrompt" xml:space="preserve">
     <value>Встановлення мови "{lang}"...\n</value>
@@ -194,5 +194,11 @@
   </data>
   <data name="LanguageOptionsPrompt" xml:space="preserve">
     <value>\tEN - English\n\tES - Español\n-&gt;\tUK - Українська</value>
+  </data>
+  <data name="ErrorPermissionPrompt" xml:space="preserve">
+    <value>Error: Se denegó el permiso para escribir en el almacenamiento.</value>
+  </data>
+  <data name="VersionPrompt" xml:space="preserve">
+    <value>Version {version} Android\n\n</value>
   </data>
 </root>

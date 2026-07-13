@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq;
 using Numbers_Windows.Resources;
+using System.ComponentModel.DataAnnotations;
 
 namespace Numbers_Windows
 {
@@ -48,7 +49,10 @@ namespace Numbers_Windows
                 _ => "-Unknown"
             };
             string version = $"{versionNumber}{versionOnlyString}";
-            Console.WriteLine($"{menuASCII}\nVersion {version}\n\n");
+            Console.WriteLine(Strings.VersionPrompt
+                .Replace("\\n", Environment.NewLine)
+                .Replace("{version}", version)
+                .Replace("{menuASCII}", menuASCII));
             LanguageManager.LoadSystemLanguage();
 
             // Method.
@@ -84,8 +88,8 @@ namespace Numbers_Windows
             // Buffer.
             int bufferedStreamSize = 1048576; // 1 MB.
             int arrayPoolSize = 65536; // 64 KB.
-            int margin = 32; // 32 Bytes. Safe margin for Utf8Formatter.
-            await Task.Run(() =>
+            int displayLimit = 10000; // Only show first #### numbers in UI.
+			await Task.Run(() =>
             {
                 using Stream rawStdout = Console.OpenStandardOutput();
                 using BufferedStream stdout = new(rawStdout, bufferedStreamSize);
@@ -105,11 +109,16 @@ namespace Numbers_Windows
                                 consoleSpan[consolePos++] = (byte)'1';
                                 for (int i = 2; i <= chosenNumber; i++)
                                 {
-                                    if (consolePos >= actualLength - margin)
+                                    if (i > displayLimit)
                                     {
                                         stdout.Write(consoleSpan[..consolePos]);
                                         consolePos = 0;
+                                        byte[] msg = Encoding.UTF8.GetBytes(Strings.OutputTruncatedPrompt);
+                                        stdout.Write(msg);
+                                        break;
                                     }
+                                    stdout.Write(consoleSpan[..consolePos]);
+                                    consolePos = 0;
 
                                     consoleSpan[consolePos++] = spaceByte;
                                     Utf8Formatter.TryFormat(i, consoleSpan[consolePos..], out bytesWritten);
@@ -117,17 +126,25 @@ namespace Numbers_Windows
                                 }
                                 break;
                             case 2: // Descending.
+                                int count = 0;
                                 Utf8Formatter.TryFormat(chosenNumber, consoleSpan[consolePos..], out bytesWritten);
                                 consolePos += bytesWritten;
 
-                                for (int i = chosenNumber - 1; i >= 1; i--)
+                                for (int i = chosenNumber; i >= 1; i--)
                                 {
-                                    if (consolePos >= actualLength - margin)
-                                    {
-                                        stdout.Write(consoleSpan[..consolePos]);
-                                        consolePos = 0;
-                                    }
+									if (count > displayLimit)
+									{
+										stdout.Write(consoleSpan[..consolePos]);
+										consolePos = 0;
+										byte[] msg = Encoding.UTF8.GetBytes(Strings.OutputTruncatedPrompt);
+										stdout.Write(msg);
+										break;
+									}
 
+									stdout.Write(consoleSpan[..consolePos]);
+                                    count++;
+                                    consolePos = 0;
+                         
                                     consoleSpan[consolePos++] = spaceByte;
                                     Utf8Formatter.TryFormat(i, consoleSpan[consolePos..], out bytesWritten);
                                     consolePos += bytesWritten;
@@ -261,8 +278,8 @@ namespace Numbers_Windows
             string targetDir = Path.Combine(tempPath, "R&C", "Numbers");
             string fileName = methodNumber switch
             {
-                1 => $"Numbers-Result_{chosenNumber}-Ascending_{timestamp}.txt",
-                2 => $"Numbers-Result_{chosenNumber}-Descending_{timestamp}.txt",
+                1 => $"Numbers-Windows_Result_{chosenNumber}-Ascending_{timestamp}.txt",
+                2 => $"Numbers-Windows_Result_{chosenNumber}-Descending_{timestamp}.txt",
                 _ => throw new ArgumentException(Strings.InvalidNumberPrompt),
             };
             string filePath = Path.Combine(targetDir, fileName);

@@ -13,6 +13,10 @@ for %%f in ("%DestinationDirectory%\Numbers_*_Windows.exe") do (
 	echo Removing file: "%%~nxf"...
 	del "%%f" /f /q
 )
+for %%f in ("%FileDirectory%\Numbers_*_Windows.exe") do (
+	echo Removing file: "%%~nxf"...
+	del "%%f" /f /q
+)
 echo.
 
 REM Change to the directory containing project file (.csproj)

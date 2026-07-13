@@ -10,7 +10,7 @@
 		<PlatformString>Windows</PlatformString>
 
 		<!--- Change the version of the program only here! <VersionOnly> have to be either 1 (as true) or 0 (as false)! -->
-		<AppVersion>5.3.0.0</AppVersion>
+		<AppVersion>5.4.0.0</AppVersion>
 		<Version>$(AppVersion)</Version>
 		<VersionOnly>0</VersionOnly>
 		
