@@ -144,6 +144,28 @@
   <data name="GenerationAndOutputPrompt" xml:space="preserve">
     <value>\nGeneración y salida de números a la consola. Espere por favor...</value>
   </data>
+  <data name="InvalidNumberPrompt" xml:space="preserve">
+    <value>El número no es válido.</value>
+  </data>
+  <data name="LanguageNeutralPrompt" xml:space="preserve">
+    <value>No se encontró el idioma "{lang}". Configurando a EN — English...\n</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="LanguageOptionsPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LanguagePrompt" xml:space="preserve">
+    <value>Ingrese su idioma: </value>
+  </data>
+  <data name="LanguageSettingPrompt" xml:space="preserve">
+    <value>Configurando el idioma a "{lang}"...\n</value>
+  </data>
+  <data name="MethodChoicePrompt" xml:space="preserve">
+    <value>Elija qué método necesita:\n1. Aumento (1 2 ... 9 10)\n2. Disminución (10 9 ... 2 1)\nIngrese el número del método: </value>
+  </data>
+  <data name="MethodChoiceWrongPrompt" xml:space="preserve">
+    <value>El número no es válido (debe estar en el rango de 1 a 2). Inténtelo de nuevo.\nIngrese el número: </value>
+  </data>
   <data name="PressEnterPrompt" xml:space="preserve">
     <value>\nPresione [Intro] para cerrar la aplicación...</value>
   </data>

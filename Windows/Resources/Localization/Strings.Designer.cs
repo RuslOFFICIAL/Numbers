@@ -142,6 +142,69 @@ namespace Numbers_Windows.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid number..
+        /// </summary>
+        internal static string InvalidNumberPrompt {
+            get {
+                return ResourceManager.GetString("InvalidNumberPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not found language &quot;{lang}&quot;. Setting to EN - English...\n.
+        /// </summary>
+        internal static string LanguageNeutralPrompt {
+            get {
+                return ResourceManager.GetString("LanguageNeutralPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EN - English\nES - Español\nUK - Українська.
+        /// </summary>
+        internal static string LanguageOptionsPrompt {
+            get {
+                return ResourceManager.GetString("LanguageOptionsPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your language: .
+        /// </summary>
+        internal static string LanguagePrompt {
+            get {
+                return ResourceManager.GetString("LanguagePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting the app to language &quot;{lang}&quot;...\n.
+        /// </summary>
+        internal static string LanguageSettingPrompt {
+            get {
+                return ResourceManager.GetString("LanguageSettingPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the method you need:\n1. Increase (1 2 ... 9 10)\n2. Decrease (10 9 ... 2 1)\nEnter the method number: .
+        /// </summary>
+        internal static string MethodChoicePrompt {
+            get {
+                return ResourceManager.GetString("MethodChoicePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid number (must be in the range of 1 to 2). Please try again.\nEnter number: .
+        /// </summary>
+        internal static string MethodChoiceWrongPrompt {
+            get {
+                return ResourceManager.GetString("MethodChoiceWrongPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to \nPress [Enter] to close the app....
         /// </summary>
         internal static string PressEnterPrompt {

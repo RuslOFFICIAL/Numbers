@@ -1,13 +1,15 @@
 ﻿using Microsoft.Maui.Controls;
+using Numbers_Android.Resources;
 using System;
 using System.Buffers;
 using System.Buffers.Text;
 using System.IO;
-using System.Reflection;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Numbers_Android.Resources;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Numbers_Android
 {
@@ -16,6 +18,10 @@ namespace Numbers_Android
 
         // Set variables
         private readonly int maxNumber = 10000000; // Changing the value of maxNumber may affect the performance of the program! 
+        private int chosenNumber;
+        private int methodNumber;
+        private bool awaitingMethod = true;
+        private bool awaitingLang = true;
 
         public MainPage()
         {
@@ -45,7 +51,8 @@ namespace Numbers_Android
 
             // Print text.
             WriteLine($"Version {version} Android\n\n");
-            WriteLine(Strings.EnterNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
+            WriteLine(Strings.LanguageOptionsPrompt.Replace("\\n", Environment.NewLine));
+            WriteLine(Strings.LanguagePrompt);
         }
         private void WriteLine(string text)
         {
@@ -72,78 +79,141 @@ namespace Numbers_Android
             // Insert number.
             string userInput = TerminalInput.Text?.Trim() ?? "";
             TerminalInput.Text = string.Empty;
-
             WriteInline($"> {userInput}\n");
 
-            if (!int.TryParse(userInput, out int chosenNumber) || chosenNumber < 1 || chosenNumber > maxNumber)
+            if (awaitingLang)
             {
-                WriteLine(Strings.WrongNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
-                WriteLine(Strings.EnterNumberAgainPrompt);
-                return;
+                bool isSupported = LanguageManager.LoadSystemLanguage(userInput);
+                if (!isSupported)
+                {
+                    WriteLine(Strings.LanguageNeutralPrompt.Replace("{lang}", userInput));
+                }
+                else
+                {
+                    WriteLine(Strings.LanguageSettingPrompt.Replace("{lang}", userInput).Replace("\\n", Environment.NewLine));
+                }
+                awaitingLang = false;
+                WriteLine(Strings.MethodChoicePrompt.Replace("\\n", Environment.NewLine));
             }
+            else if (awaitingMethod)
+            {
+                // MethodNumber.
+                if (int.TryParse(userInput, out int m) && m >= 1 && m <= 2)
+                {
+                    methodNumber = m;
+                    awaitingMethod = false;
+                    WriteLine(Strings.EnterNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
+                }
+                else
+                {
+                    WriteLine(Strings.MethodChoiceWrongPrompt.Replace("\\n", Environment.NewLine));
+                }
+            }
+            else
+            {
+                // ChosenNumber.
+                if (int.TryParse(userInput, out int n) && n >= 1 && n <= maxNumber)
+                {
+                    chosenNumber = n;
+                    await RunFullProcess();
+                }
+                else
+                {
+                    WriteLine(Strings.WrongNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
+                    WriteLine(Strings.EnterNumberAgainPrompt);
+                }
 
+            }
+        }
+
+        private async Task RunFullProcess()
+        {
             TerminalInput.IsEnabled = false;
 
-            // Launching other processes.
-            await ProcessNumbersAsync(chosenNumber);
+            // Other processes.
+            await ProcessNumbersAsync(chosenNumber, methodNumber);
             WriteLine("\n");
             SeparatorLine.IsVisible = true;
-            await CreateFileAsync(chosenNumber);
+            await CreateFileAsync(chosenNumber, methodNumber);
 
+            // Newxt cycle.
+            awaitingMethod = true;
             TerminalInput.IsEnabled = true;
             WriteLine(Strings.NewCyclePrompt.Replace("\\n", Environment.NewLine));
         }
 
-        private async Task ProcessNumbersAsync(int chosenNumber)
+        private async Task ProcessNumbersAsync(int chosenNumber, int methodNumber)
         {
             WriteLine(Strings.GenerationAndOutputPrompt.Replace("\\n", Environment.NewLine));
 
-            // Buffer.
-            int bufferedStreamSize = 1048576; // 1 MB.
-            int margin = 32; // 32 Bytes. Safe margin for Utf8Formatter.
+
+            void FlushToUI(string text)
+            {
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    TerminalOutput.Text += text;
+                });
+            }
+
             await Task.Run(() =>
             {
-                byte[] pooledBuffer = ArrayPool<byte>.Shared.Rent(bufferedStreamSize);
+                StringBuilder sb = new();
+                int bufferedStreamSize = 1048576; // 1 MB.
+                int displayLimit = 10000; // Only show first #### numbers in UI.
 
-                try
+                switch (methodNumber)
                 {
-                    Span<byte> consoleSpan = pooledBuffer.AsSpan();
-                    int actualLength = consoleSpan.Length;
-                    int consolePos = 0;
-
-                    const byte spaceByte = (byte)' ';
-                    consoleSpan[consolePos++] = (byte)'1';
-
-                    for (int i = 2; i <= chosenNumber; i++)
-                    {
-                        if (consolePos >= actualLength - margin)
+                    case 1: // Ascending.
+                        for (int i = 1; i <= chosenNumber; i++)
                         {
-                            string chunk = Encoding.UTF8.GetString(pooledBuffer, 0, consolePos);
-                            MainThread.BeginInvokeOnMainThread(() => {
-                                TerminalOutput.Text += chunk;
-                            });
-                            consolePos = 0;
+                            if (i <= displayLimit)
+                            {
+                                sb.Append(i).Append(i == chosenNumber ? "" : " ");
+                                if (sb.Length > bufferedStreamSize)
+                                {
+                                    FlushToUI(sb.ToString());
+                                    sb.Clear();
+                                }
+                                else if (i == displayLimit + 1)
+                                {
+                                    FlushToUI(sb.ToString() + Strings.OutputTruncatedPrompt);
+                                    sb.Clear();
+                                    break;
+                                }
+                            }
                         }
-
-                        consoleSpan[consolePos++] = spaceByte;
-                        Utf8Formatter.TryFormat(i, consoleSpan[consolePos..], out int bytesWritten);
-                        consolePos += bytesWritten;
-                    }
-
-                    if (consolePos > 0)
-                    {
-                        string chunk = Encoding.UTF8.GetString(pooledBuffer, 0, consolePos);
-                        WriteInline(chunk);
-                    }
+                        break;
+                    case 2: // Descending.
+                        for (int i = chosenNumber; i >= 1; i--)
+                        {
+                            if (chosenNumber - i < displayLimit)
+                            {
+                                sb.Append(i).Append(i == 1 ? "" : " ");
+                                if (sb.Length > bufferedStreamSize)
+                                {
+                                    FlushToUI(sb.ToString());
+                                    sb.Clear();
+                                }
+                            }
+                            else
+                            {
+                                FlushToUI(sb.ToString() + Strings.OutputTruncatedPrompt);
+                                break;
+                            }
+                        }
+                        break;
+                    default:
+                        throw new ArgumentException(Strings.InvalidNumberPrompt);
                 }
-                finally
+
+                if (sb.Length > 0)
                 {
-                    ArrayPool<byte>.Shared.Return(pooledBuffer);
+                    FlushToUI(sb.ToString());
                 }
             });
         }
 
-        private static async Task WriteToFileAsync(string filePath, int chosenNumber)
+        private static async Task WriteToFileAsync(string filePath, int chosenNumber, int methodNumber)
         {
             // Set variables
             int internalStreamBuffer = 4096; // 4 KB.
@@ -170,24 +240,42 @@ namespace Numbers_Android
                     Memory<byte> fileMemory = pooledBuffer.AsMemory();
                     int actualLength = fileMemory.Length;
                     int filePos = 0;
-
                     const byte spaceByte = (byte)' ';
-                    Span<byte> initialSpan = fileMemory.Span;
-                    initialSpan[filePos++] = (byte)'1';
 
-                    for (int i = 2; i <= chosenNumber; i++)
+                    switch (methodNumber)
                     {
-                        if (filePos >= actualLength - fileMargin)
-                        {
-                            await fs.WriteAsync(fileMemory[..filePos]);
-                            filePos = 0;
-                        }
+                        case 1: // Ascending.
+                            fileMemory.Span[filePos++] = (byte)'1';
+                            for (int i = 2; i <= chosenNumber; i++)
+                            {
+                                if (filePos >= actualLength - fileMargin)
+                                {
+                                    await fs.WriteAsync(fileMemory[..filePos]);
+                                    filePos = 0;
+                                }
 
-                        Span<byte> currentSpan = fileMemory.Span;
-                        currentSpan[filePos++] = spaceByte;
+                                fileMemory.Span[filePos++] = spaceByte;
 
-                        Utf8Formatter.TryFormat(i, currentSpan[filePos..], out int bytesWritten);
-                        filePos += bytesWritten;
+                                Utf8Formatter.TryFormat(i, fileMemory.Span[filePos..], out int bytesWritten);
+                                filePos += bytesWritten;
+                            }
+                            break;
+                        case 2: // Descending.
+                            Utf8Formatter.TryFormat(chosenNumber, fileMemory.Span[filePos..], out int bytesWrittenDesc);
+                            filePos += bytesWrittenDesc;
+                            for (int i = chosenNumber - 1; i >= 1; i--)
+                            {
+                                if (filePos >= actualLength - fileMargin)
+                                {
+                                    await fs.WriteAsync(fileMemory[..filePos]);
+                                    filePos = 0;
+                                }
+
+                                fileMemory.Span[filePos++] = spaceByte;
+                                Utf8Formatter.TryFormat(i, fileMemory.Span[filePos..], out int bytesWritten);
+                                filePos += bytesWritten;
+                            }
+                            break;
                     }
 
                     if (filePos > 0)
@@ -223,12 +311,17 @@ namespace Numbers_Android
             return totalBytes;
         }
 
-        private async Task CreateFileAsync(int chosenNumber)
+        private async Task CreateFileAsync(int chosenNumber, int methodNumber)
         {
             // Set variables.
             string timestamp = DateTime.Now.ToString("dd-MM-yyyy_HH-mm-ss");
             string targetDir = "/storage/emulated/0/R&C/Numbers/";
-            string fileName = $"Numbers-Result_{chosenNumber}_{timestamp}.txt";
+            string fileName = methodNumber switch
+            {
+                1 => $"Numbers-Result_{chosenNumber}-Ascending_{timestamp}.txt",
+                2 => $"Numbers-Result_{chosenNumber}-Descending_{timestamp}.txt",
+                _ => throw new ArgumentException(Strings.InvalidNumberPrompt),
+            };
             string filePath = Path.Combine(targetDir, fileName);
 
             // Calculate file size.
@@ -252,11 +345,24 @@ namespace Numbers_Android
                     if (!Directory.Exists(targetDir))
                     {
                         WriteLine(Strings.CreatingDirectoryPrompt.Replace("{targetDir}", targetDir));
+                        
+                        // Permission check.
+                        var status = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+                        if (status != PermissionStatus.Granted)
+                        {
+                            status = await Permissions.RequestAsync<Permissions.StorageWrite>();
+                        }
+                        if (status != PermissionStatus.Granted)
+                        {
+                            WriteLine("Error: Permission to write to storage was denied.");
+                            return;
+                        }
+
                         Directory.CreateDirectory(targetDir);
                         WriteInline(Strings.CreatingDirectorySuccessPrompt);
                     }
                     WriteLine(Strings.SaveFileProcessPrompt);
-                    await Task.Run(() => WriteToFileAsync(filePath, chosenNumber));
+                    await Task.Run(() => WriteToFileAsync(filePath, chosenNumber, methodNumber));
                     WriteLine(Strings.FilePathPrompt
                         .Replace("{filePath}", filePath)
                         .Replace("\\n", Environment.NewLine));

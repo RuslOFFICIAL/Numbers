@@ -144,6 +144,27 @@
   <data name="GenerationAndOutputPrompt" xml:space="preserve">
     <value>\nGeneration and output of numbers to the console. Please wait...</value>
   </data>
+  <data name="InvalidNumberPrompt" xml:space="preserve">
+    <value>Invalid number.</value>
+  </data>
+  <data name="LanguageNeutralPrompt" xml:space="preserve">
+    <value>Not found language "{lang}". Setting to EN - English...\n</value>
+  </data>
+  <data name="LanguageOptionsPrompt" xml:space="preserve">
+    <value>EN - English\nES - Español\nUK - Українська</value>
+  </data>
+  <data name="LanguagePrompt" xml:space="preserve">
+    <value>Enter your language: </value>
+  </data>
+  <data name="LanguageSettingPrompt" xml:space="preserve">
+    <value>Setting the app to language "{lang}"...\n</value>
+  </data>
+  <data name="MethodChoicePrompt" xml:space="preserve">
+    <value>Choose the method you need:\n1. Increase (1 2 ... 9 10)\n2. Decrease (10 9 ... 2 1)\nEnter the method number: </value>
+  </data>
+  <data name="MethodChoiceWrongPrompt" xml:space="preserve">
+    <value>Invalid number (must be in the range of 1 to 2). Please try again.\nEnter number: </value>
+  </data>
   <data name="PressEnterPrompt" xml:space="preserve">
     <value>\nPress [Enter] to close the app...</value>
   </data>

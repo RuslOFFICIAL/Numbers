@@ -151,7 +151,70 @@ namespace Numbers_Android.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nDone! Enter the new number for the new cycle:.
+        ///   Looks up a localized string similar to Invalid number..
+        /// </summary>
+        public static string InvalidNumberPrompt {
+            get {
+                return ResourceManager.GetString("InvalidNumberPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not found language &quot;{lang}&quot;. Setting to EN - English...\n.
+        /// </summary>
+        public static string LanguageNeutralPrompt {
+            get {
+                return ResourceManager.GetString("LanguageNeutralPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EN - English\nES - Español\nUK - Українська.
+        /// </summary>
+        public static string LanguageOptionsPrompt {
+            get {
+                return ResourceManager.GetString("LanguageOptionsPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your language: .
+        /// </summary>
+        public static string LanguagePrompt {
+            get {
+                return ResourceManager.GetString("LanguagePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting the app to language &quot;{lang}&quot;...\n.
+        /// </summary>
+        public static string LanguageSettingPrompt {
+            get {
+                return ResourceManager.GetString("LanguageSettingPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the method you need:\n1. Increase (1 2 ... 9 10)\n2. Decrease (10 9 ... 2 1)\nEnter the method number: .
+        /// </summary>
+        public static string MethodChoicePrompt {
+            get {
+                return ResourceManager.GetString("MethodChoicePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid number (must be in the range of 1 to 2). Please try again.\nEnter number: .
+        /// </summary>
+        public static string MethodChoiceWrongPrompt {
+            get {
+                return ResourceManager.GetString("MethodChoiceWrongPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \nDone! Enter the new method number and new number for the new cycle:.
         /// </summary>
         public static string NewCyclePrompt {
             get {
@@ -165,6 +228,15 @@ namespace Numbers_Android.Resources {
         public static string NoPrompt {
             get {
                 return ResourceManager.GetString("NoPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ... (Output truncated for performance).
+        /// </summary>
+        public static string OutputTruncatedPrompt {
+            get {
+                return ResourceManager.GetString("OutputTruncatedPrompt", resourceCulture);
             }
         }
         

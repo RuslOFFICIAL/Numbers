@@ -133,13 +133,13 @@
     <value>Ingrese un número (debe estar en el rango 1 a {maxNumber:N0}): </value>
   </data>
   <data name="FileDirectoryPrompt" xml:space="preserve">
-    <value>El archivo se guardará en: "{targetDir}"</value>
+    <value>El archivo se guardará en: "{targetDir}". </value>
   </data>
   <data name="FilePathPrompt" xml:space="preserve">
     <value>¡Guardado exitosamente! Ruta del archivo:\n"{filePath}"</value>
   </data>
   <data name="FileSizePrompt" xml:space="preserve">
-    <value>Tamaño del archivo: {fileSizeInBytes:N0} bytes ({fileSizeInMB:F2} MB)</value>
+    <value>Tamaño del archivo: {fileSizeInBytes:N0} bytes ({fileSizeInMB:F2} MB). </value>
   </data>
   <data name="GenerationAndOutputPrompt" xml:space="preserve">
     <value>\nGeneración y salida de números a la consola. Espere por favor...</value>
@@ -166,9 +166,34 @@
     <value>Intente darle permiso a Numbers para acceder a todos los archivos.</value>
   </data>
   <data name="NewCyclePrompt" xml:space="preserve">
-    <value>\n¡Listo! Ingrese el nuevo número para el nuevo ciclo:</value>
+    <value>¡Listo! Ingrese el número del nuevo método y el nuevo número para el nuevo ciclo:</value>
   </data>
   <data name="SaveFileProcessPrompt" xml:space="preserve">
     <value>Escribiendo en el archivo...</value>
+  </data>
+  <data name="InvalidNumberPrompt" xml:space="preserve">
+    <value>El número no es válido.</value>
+  </data>
+  <data name="MethodChoicePrompt" xml:space="preserve">
+    <value>Elija qué método necesita:\n1. Aumento (1 2 ... 9 10)\n2. Disminución (10 9 ... 2 1)\nIngrese el número del método: </value>
+  </data>
+  <data name="MethodChoiceWrongPrompt" xml:space="preserve">
+    <value>El número no es válido (debe estar en el rango de 1 a 2). Inténtelo de nuevo.\nIngrese el número: </value>
+  </data>
+  <data name="OutputTruncatedPrompt" xml:space="preserve">
+    <value>... (Salida truncada por rendimiento)</value>
+  </data>
+  <data name="LanguageSettingPrompt" xml:space="preserve">
+    <value>Configurando el idioma a "{lang}"...\n</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="LanguageOptionsPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LanguagePrompt" xml:space="preserve">
+    <value>Ingrese su idioma: </value>
+  </data>
+  <data name="LanguageNeutralPrompt" xml:space="preserve">
+    <value>No se encontró el idioma "{lang}". Configurando a EN — English...\n</value>
   </data>
 </root>

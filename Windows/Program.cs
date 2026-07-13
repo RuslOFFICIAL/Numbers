@@ -21,7 +21,8 @@ namespace Numbers_Windows
             System.Threading.Thread.CurrentThread.CurrentUICulture = currentCulture;
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = currentCulture;
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = currentCulture;
-
+            
+            
             // UI setup.
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
@@ -29,6 +30,7 @@ namespace Numbers_Windows
             // Set variables.
             int maxNumber = 100000000; // Changing the value of maxNumber may affect the performance of the program!
             int chosenNumber;
+            int methodNumber;
             string menuASCII = " _______                      ___.                               \r\n \\      \\    __ __    _____   \\_ |__     ____   _______    ______\r\n /   |   \\  |  |  \\  /     \\   | __ \\  _/ __ \\  \\_  __ \\  /  ___/\r\n/    |    \\ |  |  / |  Y Y  \\  | \\_\\ \\ \\  ___/   |  | \\/  \\___ \\ \r\n\\____|__  / |____/  |__|_|  /  |___  /  \\___  >  |__|    /____  >\r\n        \\/                \\/       \\/       \\/                \\/ ";
             var attributes = Assembly.GetExecutingAssembly()
                 .GetCustomAttributes<AssemblyMetadataAttribute>()
@@ -47,6 +49,15 @@ namespace Numbers_Windows
             };
             string version = $"{versionNumber}{versionOnlyString}";
             Console.WriteLine($"{menuASCII}\nVersion {version}\n\n");
+            LanguageManager.LoadSystemLanguage();
+
+            // Method.
+            Console.Write(Strings.MethodChoicePrompt.Replace("\\n", Environment.NewLine));
+
+            while (!int.TryParse(Console.ReadLine(), out methodNumber) || methodNumber < 1 || methodNumber > 2)
+            {
+                Console.Write(Strings.MethodChoiceWrongPrompt.Replace("\\n", Environment.NewLine));
+            }
 
             // Insert number.
             Console.Write(Strings.EnterNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
@@ -58,15 +69,15 @@ namespace Numbers_Windows
             }
 
             // Launching other processes.
-            await ProcessNumbersAsync(chosenNumber);
-            await CreateFileAsync(chosenNumber);
+            await ProcessNumbersAsync(chosenNumber, methodNumber);
+            await CreateFileAsync(chosenNumber, methodNumber);
 
             // End.
             Console.WriteLine(Strings.PressEnterPrompt.Replace("\\n", Environment.NewLine));
             Console.ReadLine();
         }
 
-        private static async Task ProcessNumbersAsync(int chosenNumber)
+        private static async Task ProcessNumbersAsync(int chosenNumber, int methodNumber)
         {
             Console.WriteLine(Strings.GenerationAndOutputPrompt.Replace("\\n", Environment.NewLine));
 
@@ -76,31 +87,55 @@ namespace Numbers_Windows
             int margin = 32; // 32 Bytes. Safe margin for Utf8Formatter.
             await Task.Run(() =>
             {
+
                 using Stream rawStdout = Console.OpenStandardOutput();
                 using BufferedStream stdout = new(rawStdout, bufferedStreamSize);
                 {
                     byte[] pooledBuffer = ArrayPool<byte>.Shared.Rent(arrayPoolSize);
-
                     try
                     {
                         Span<byte> consoleSpan = pooledBuffer.AsSpan();
                         int actualLength = consoleSpan.Length;
                         int consolePos = 0;
-
+                        int bytesWritten;
                         const byte spaceByte = (byte)' ';
-                        consoleSpan[consolePos++] = (byte)'1';
 
-                        for (int i = 2; i <= chosenNumber; i++)
+                        switch(methodNumber)
                         {
-                            if (consolePos >= actualLength - margin)
-                            {
-                                stdout.Write(consoleSpan[..consolePos]);
-                                consolePos = 0;
-                            }
+                            case 1: // Ascending
+                                consoleSpan[consolePos++] = (byte)'1';
+                                for (int i = 2; i <= chosenNumber; i++)
+                                {
+                                    if (consolePos >= actualLength - margin)
+                                    {
+                                        stdout.Write(consoleSpan[..consolePos]);
+                                        consolePos = 0;
+                                    }
 
-                            consoleSpan[consolePos++] = spaceByte;
-                            Utf8Formatter.TryFormat(i, consoleSpan[consolePos..], out int bytesWritten);
-                            consolePos += bytesWritten;
+                                    consoleSpan[consolePos++] = spaceByte;
+                                    Utf8Formatter.TryFormat(i, consoleSpan[consolePos..], out bytesWritten);
+                                    consolePos += bytesWritten;
+                                }
+                                break;
+                            case 2: // Descending.
+                                Utf8Formatter.TryFormat(chosenNumber, consoleSpan[consolePos..], out bytesWritten);
+                                consolePos += bytesWritten;
+
+                                for (int i = chosenNumber - 1; i >= 1; i--)
+                                {
+                                    if (consolePos >= actualLength - margin)
+                                    {
+                                        stdout.Write(consoleSpan[..consolePos]);
+                                        consolePos = 0;
+                                    }
+
+                                    consoleSpan[consolePos++] = spaceByte;
+                                    Utf8Formatter.TryFormat(i, consoleSpan[consolePos..], out bytesWritten);
+                                    consolePos += bytesWritten;
+                                }
+                                break;
+                            default:
+                                throw new ArgumentException(Strings.InvalidNumberPrompt);
                         }
 
                         if (consolePos > 0)
@@ -117,7 +152,7 @@ namespace Numbers_Windows
             });
         }
 
-        private static async Task WriteToFileAsync(string filePath, int chosenNumber)
+        private static async Task WriteToFileAsync(string filePath, int chosenNumber, int methodNumber)
         {
             // Set variables
             int internalStreamBuffer = 4096; // 4 KB.
@@ -137,34 +172,51 @@ namespace Numbers_Windows
             // Optimization.
             using FileStream fs = File.Open(filePath, options);
             {
-                byte[] pooledBuffer = ArrayPool<byte>.Shared.Rent(fileArrayPoolSize); // 1 MB
+                byte[] pooledBuffer = ArrayPool<byte>.Shared.Rent(fileArrayPoolSize);
 
                 try
                 {
                     Memory<byte> fileMemory = pooledBuffer.AsMemory();
                     int actualLength = fileMemory.Length;
                     int filePos = 0;
-
                     const byte spaceByte = (byte)' ';
 
-                    Span<byte> initialSpan = fileMemory.Span;
-                    initialSpan[filePos++] = (byte)'1';
-
-                    for (int i = 2; i <= chosenNumber; i++)
+                    switch (methodNumber)
                     {
-                        if (filePos >= actualLength - fileMargin)
-                        {
-                            await fs.WriteAsync(fileMemory[..filePos]);
-                            filePos = 0;
-                        }
+                        case 1: // Ascending.
+                            fileMemory.Span[filePos++] = (byte)'1';
+                            for (int i = 2; i <= chosenNumber; i++)
+                            {
+                                if (filePos >= actualLength - fileMargin)
+                                {
+                                    await fs.WriteAsync(fileMemory[..filePos]);
+                                    filePos = 0;
+                                }
 
-                        Span<byte> currentSpan = fileMemory.Span;
-                        currentSpan[filePos++] = spaceByte;
+                                fileMemory.Span[filePos++] = spaceByte;
 
-                        Utf8Formatter.TryFormat(i, currentSpan[filePos..], out int bytesWritten);
-                        filePos += bytesWritten;
+                                Utf8Formatter.TryFormat(i, fileMemory.Span[filePos..], out int bytesWritten);
+                                filePos += bytesWritten;
+                            }
+                            break;
+                        case 2: // Descending.
+                            Utf8Formatter.TryFormat(chosenNumber, fileMemory.Span[filePos..], out int bytesWrittenDesc);
+                            filePos += bytesWrittenDesc;
+                            for (int i = chosenNumber - 1; i >= 1; i--)
+                            {
+                                if (filePos >= actualLength - fileMargin)
+                                {
+                                    await fs.WriteAsync(fileMemory[..filePos]);
+                                    filePos = 0;
+                                }
+
+                                fileMemory.Span[filePos++] = spaceByte;
+                                Utf8Formatter.TryFormat(i, fileMemory.Span[filePos..], out int bytesWritten);
+                                filePos += bytesWritten;
+                            }
+                            break;
                     }
-
+                    
                     if (filePos > 0)
                     {
                         await fs.WriteAsync(fileMemory[..filePos]);
@@ -202,13 +254,18 @@ namespace Numbers_Windows
             return totalBytes;
         }
 
-        private static async Task CreateFileAsync(int chosenNumber)
+        private static async Task CreateFileAsync(int chosenNumber, int methodNumber)
         {
             // Set variables.
             string timestamp = DateTime.Now.ToString("dd-MM-yyyy_HH-mm-ss");
             string tempPath = Environment.GetEnvironmentVariable("TEMP") ?? Environment.CurrentDirectory;
             string targetDir = Path.Combine(tempPath, "R&C", "Numbers");
-            string fileName = $"Numbers-Result_{chosenNumber}_{timestamp}.txt";
+            string fileName = methodNumber switch
+            {
+                1 => $"Numbers-Result_{chosenNumber}-Ascending_{timestamp}.txt",
+                2 => $"Numbers-Result_{chosenNumber}-Descending_{timestamp}.txt",
+                _ => throw new ArgumentException(Strings.InvalidNumberPrompt),
+            };
             string filePath = Path.Combine(targetDir, fileName);
 
             // Calculate file size.
@@ -243,7 +300,7 @@ namespace Numbers_Windows
                         Console.Write(Strings.CreatingDirectorySuccessPrompt);
                     }
                     Console.WriteLine(Strings.SaveFileProcessPrompt);
-                    await Task.Run(() => WriteToFileAsync(filePath, chosenNumber));
+                    await Task.Run(() => WriteToFileAsync(filePath, chosenNumber, methodNumber));
                     Console.WriteLine(Strings.FilePathPrompt
                         .Replace("{filePath}", filePath)
                         .Replace("\\n", Environment.NewLine));

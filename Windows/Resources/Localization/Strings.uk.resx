@@ -144,6 +144,28 @@
   <data name="GenerationAndOutputPrompt" xml:space="preserve">
     <value>\nГенерація та вивід чисел у консоль. Будь ласка, зачекайте...</value>
   </data>
+  <data name="InvalidNumberPrompt" xml:space="preserve">
+    <value>Число не підходить.</value>
+  </data>
+  <data name="LanguageNeutralPrompt" xml:space="preserve">
+    <value>Мову "{lang}" не знайдено. Встановлюю EN — English...\n</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="LanguageOptionsPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LanguagePrompt" xml:space="preserve">
+    <value>Введіть вашу мову: </value>
+  </data>
+  <data name="LanguageSettingPrompt" xml:space="preserve">
+    <value>Встановлення мови "{lang}"...\n</value>
+  </data>
+  <data name="MethodChoicePrompt" xml:space="preserve">
+    <value>Виберіть, який метод вам потрібно:\n1. Збільшення (1 2 ... 9 10)\n2. Зменшення (10 9 ... 2 1)\nВведіть число методу: </value>
+  </data>
+  <data name="MethodChoiceWrongPrompt" xml:space="preserve">
+    <value>Число не підходить (повинно бути в діапазоні від 1 до 2). Спробуйте знову.\nВведіть число: </value>
+  </data>
   <data name="PressEnterPrompt" xml:space="preserve">
     <value>\nНатисніть [Enter] щоб закрити програму...</value>
   </data>

@@ -1,4 +1,4 @@
-Numbers is a simple-basic program to print every number from the number A to the number B.
+Numbers is a simple-basic program to print every number from the number A to the number B, or from the number B to the number A.
 Original version of Numbers ported on: Windows, Android.
 Originally made out of fun. :3
 
