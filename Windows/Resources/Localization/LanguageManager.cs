@@ -8,7 +8,7 @@ class LanguageManager
 {
     public static void LoadSystemLanguage()
     {
-        Console.WriteLine(Strings.LanguageOptionsPrompt.Replace("\\n", Environment.NewLine));
+        Console.WriteLine(Strings.LanguageOptionsPrompt.Replace("\\n", Environment.NewLine).Replace("\\t", Constants.ConsoleTab));
         Console.Write(Strings.LanguagePrompt);
         string? lang = Console.ReadLine()?.ToLowerInvariant();
 
@@ -31,4 +31,9 @@ class LanguageManager
                 break;
         };
     }
+
+	public static class Constants
+	{
+		public const string ConsoleTab = "\t";
+	}
 }

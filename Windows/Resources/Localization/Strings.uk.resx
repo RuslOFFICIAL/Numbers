@@ -151,7 +151,7 @@
     <value>Мову "{lang}" не знайдено. Встановлюю EN — English...\n</value>
   </data>
   <data name="LanguageOptionsPrompt" xml:space="preserve">
-    <value>   EN - English\n   ES - Español\n-&gt; UK - Українська</value>
+    <value>\tEN - English\n\tES - Español\n-&gt;\tUK - Українська</value>
   </data>
   <data name="LanguagePrompt" xml:space="preserve">
     <value>Введіть вашу мову: </value>

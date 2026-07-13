@@ -87,7 +87,6 @@ namespace Numbers_Windows
             int margin = 32; // 32 Bytes. Safe margin for Utf8Formatter.
             await Task.Run(() =>
             {
-
                 using Stream rawStdout = Console.OpenStandardOutput();
                 using BufferedStream stdout = new(rawStdout, bufferedStreamSize);
                 {

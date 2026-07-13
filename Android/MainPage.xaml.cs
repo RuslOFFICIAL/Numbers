@@ -51,7 +51,9 @@ namespace Numbers_Android
 
             // Print text.
             WriteLine($"Version {version} Android\n\n");
-            WriteLine(Strings.LanguageOptionsPrompt.Replace("\\n", Environment.NewLine));
+            WriteLine(Strings.LanguageOptionsPrompt
+                .Replace("\\n", Environment.NewLine)
+                .Replace("\\t", Constants.ConsoleTab));
             WriteLine(Strings.LanguagePrompt);
         }
         private void WriteLine(string text)
@@ -163,46 +165,28 @@ namespace Numbers_Android
             {
                 StringBuilder sb = new();
                 int bufferedStreamSize = 1048576; // 1 MB.
-                int displayLimit = 10000; // Only show first #### numbers in UI.
 
                 switch (methodNumber)
                 {
                     case 1: // Ascending.
                         for (int i = 1; i <= chosenNumber; i++)
                         {
-                            if (i <= displayLimit)
+                            sb.Append(i).Append(i == chosenNumber ? "" : " ");
+                            if (sb.Length > bufferedStreamSize)
                             {
-                                sb.Append(i).Append(i == chosenNumber ? "" : " ");
-                                if (sb.Length > bufferedStreamSize)
-                                {
-                                    FlushToUI(sb.ToString());
-                                    sb.Clear();
-                                }
-                                else if (i == displayLimit + 1)
-                                {
-                                    FlushToUI(sb.ToString() + Strings.OutputTruncatedPrompt);
-                                    sb.Clear();
-                                    break;
-                                }
+                                FlushToUI(sb.ToString());
+                                sb.Clear();
                             }
                         }
                         break;
                     case 2: // Descending.
                         for (int i = chosenNumber; i >= 1; i--)
                         {
-                            if (chosenNumber - i < displayLimit)
+                            sb.Append(i).Append(i == 1 ? "" : " ");
+                            if (sb.Length > bufferedStreamSize)
                             {
-                                sb.Append(i).Append(i == 1 ? "" : " ");
-                                if (sb.Length > bufferedStreamSize)
-                                {
-                                    FlushToUI(sb.ToString());
-                                    sb.Clear();
-                                }
-                            }
-                            else
-                            {
-                                FlushToUI(sb.ToString() + Strings.OutputTruncatedPrompt);
-                                break;
+                                FlushToUI(sb.ToString());
+                                sb.Clear();
                             }
                         }
                         break;
@@ -385,6 +369,11 @@ namespace Numbers_Android
             }
         }
     }
+
+	public static class Constants
+	{
+		public const string ConsoleTab = "\t";
+	}
 }
 
 // All ASCII arts are from https://patorjk.com/software/taag/#p=display&f=Graffiti&t=N+++u+++m+++b+++e+++r+++s&x=none&v=4&h=4&w=80&we=false

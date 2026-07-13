@@ -37,7 +37,7 @@ dotnet publish -f net9.0-android -c Release -p:AndroidPackageFormat=apk ^
 echo Build complete.
 
 REM Choice.
-echo It may to be run as an Administrator.
+echo It may have to be done as an Administrator.
 choice /c YN /m "Do you want to copy the file to '%DestinationDirectory%'?"
 if %errorlevel%==1 goto Copy
 if %errorlevel%==2 goto NoCopy
@@ -64,3 +64,4 @@ goto End
 :End
 endlocal&echo.&echo Done!
 pause
+exit

@@ -151,7 +151,7 @@
     <value>Not found language "{lang}". Setting to EN - English...\n</value>
   </data>
   <data name="LanguageOptionsPrompt" xml:space="preserve">
-    <value>-&gt; EN - English\n   ES - Español\n   UK - Українська</value>
+    <value>-&gt;\tEN - English\n\tES - Español\n\tUK - Українська</value>
   </data>
   <data name="LanguagePrompt" xml:space="preserve">
     <value>Enter your language: </value>

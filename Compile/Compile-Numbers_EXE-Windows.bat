@@ -24,13 +24,15 @@ dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=
 echo Build complete.
 
 REM Choice.
-echo It may to be run as an Administrator.
+echo It may need to be done as an Administrator.
 choice /c YN /m "Do you want to copy the file to '%DestinationDirectory%'?"
 if %errorlevel%==1 goto Copy
 if %errorlevel%==2 goto NoCopy
 
 :Copy
-robocopy "%FileDirectory%" "%DestinationDirectory%" "*.exe" /IS /IT /COPYALL
+for %%f in ("%FileDirectory%\*.exe") do (
+	copy "%%f" "%DestinationDirectory%"
+)
 echo Copied.
 goto End
 
@@ -41,3 +43,4 @@ goto End
 :End
 endlocal&echo.&echo Done!
 pause
+exit

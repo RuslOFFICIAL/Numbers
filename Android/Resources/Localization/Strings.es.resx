@@ -193,6 +193,6 @@
     <value>No se encontró el idioma "{lang}". Configurando a EN — English...\n</value>
   </data>
   <data name="LanguageOptionsPrompt" xml:space="preserve">
-    <value>   EN - English\n-&gt; ES - Español\n   UK - Українська</value>
+    <value>\tEN - English\n-&gt;\tES - Español\n\tUK - Українська</value>
   </data>
 </root>
