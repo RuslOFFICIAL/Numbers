@@ -115,7 +115,7 @@ namespace Numbers_Windows
                                         consolePos = 0;
                                         byte[] msg = Encoding.UTF8.GetBytes(Strings.OutputTruncatedPrompt);
                                         stdout.Write(msg);
-                                        break;
+                                        return;
                                     }
                                     stdout.Write(consoleSpan[..consolePos]);
                                     count++;
@@ -138,7 +138,7 @@ namespace Numbers_Windows
 										consolePos = 0;
 										byte[] msg = Encoding.UTF8.GetBytes(Strings.OutputTruncatedPrompt);
 										stdout.Write(msg);
-										break;
+										return;
 									}
 
 									stdout.Write(consoleSpan[..consolePos]);

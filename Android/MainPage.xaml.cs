@@ -168,6 +168,7 @@ namespace Numbers_Android
                 int bufferedStreamSize = 1048576; // 1 MB.
                 int displayLimit = 10000; // Only show first #### numbers in UI.
 				int count = 0;
+				bool isTruncated = false;
 
 				switch (methodNumber)
                 {
@@ -179,7 +180,7 @@ namespace Numbers_Android
 								FlushToUI(sb.ToString());
 								WriteLine(Strings.OutputTruncatedPrompt);
 								sb.Clear();
-								break;
+								return;
 							}
 
                             sb.Append(i).Append(i == chosenNumber ? "" : " ");
@@ -199,7 +200,8 @@ namespace Numbers_Android
                                 FlushToUI(sb.ToString());
                                 WriteLine(Strings.OutputTruncatedPrompt);
                                 sb.Clear();
-                                break;
+								isTruncated = true;
+								return;
                             }
                             
                             sb.Append(i).Append(i == 1 ? "" : " ");
@@ -215,7 +217,7 @@ namespace Numbers_Android
                         throw new ArgumentException(Strings.InvalidNumberPrompt);
                 }
 
-                if (sb.Length > 0)
+                if (!isTruncated && sb.Length > 0)
                 {
                     FlushToUI(sb.ToString());
                 }
