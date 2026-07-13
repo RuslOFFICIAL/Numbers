@@ -10,10 +10,10 @@
 		<PlatformString>Android</PlatformString>
 
 		<!--- Change the version of the program only here! <ApplicationVersion> always has to be changed by 1! <VersionOnly> have to be either 1 (as true) or 0 (as false)! -->
-		<ApplicationDisplayVersion>5.3.0.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>5.3.0.1</ApplicationDisplayVersion>
 		<Version>$(ApplicationDisplayVersion)</Version>
-		<ApplicationVersion>12</ApplicationVersion>
-		<VersionOnly>0</VersionOnly>
+		<ApplicationVersion>13</ApplicationVersion>
+		<VersionOnly>1</VersionOnly>
 		<NeutralLanguage>en-US</NeutralLanguage>
 
 		<ApplicationTitle>Numbers</ApplicationTitle>

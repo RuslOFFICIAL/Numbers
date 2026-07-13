@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:local="clr-namespace:Numbers_Android.Resources"
              x:Class="Numbers_Android.MainPage"
              BackgroundColor="Black">
 
@@ -34,7 +35,7 @@
                    TextColor="White" 
                    BackgroundColor="#09090B"
                    FontFamily="Monospace" 
-                   Placeholder="Введіть число..."
+                   Placeholder="{x:Static local:Strings.EnterNumberAgainPrompt}"
                    Completed="OnInputSubmitted"/>
         </HorizontalStackLayout>
 
