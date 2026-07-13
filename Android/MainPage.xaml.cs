@@ -168,13 +168,14 @@ namespace Numbers_Android
                 StringBuilder sb = new();
                 int bufferedStreamSize = 1048576; // 1 MB.
                 int displayLimit = 10000; // Only show first #### numbers in UI.
+				int count = 0;
 
 				switch (methodNumber)
                 {
                     case 1: // Ascending.
-                        for (int i = 1; i <= chosenNumber; i++)
+                        for (int i = chosenNumber; i >= 1;  i++)
                         {
-							if (i > displayLimit)
+							if (count >= displayLimit)
                             {
 								FlushToUI(sb.ToString());
 								WriteLine(Strings.OutputTruncatedPrompt);
@@ -183,6 +184,7 @@ namespace Numbers_Android
 							}
 
                             sb.Append(i).Append(i == chosenNumber ? "" : " ");
+                            count++;
                             if (sb.Length > bufferedStreamSize)
                             {
                                 FlushToUI(sb.ToString());
@@ -191,10 +193,9 @@ namespace Numbers_Android
                         }
                         break;
                     case 2: // Descending.
-						int count = 0;
 						for (int i = chosenNumber; i >= 1; i--)
                         {
-                            if (count > displayLimit)
+                            if (count >= displayLimit)
                             {
                                 FlushToUI(sb.ToString());
                                 WriteLine(Strings.OutputTruncatedPrompt);
@@ -205,10 +206,10 @@ namespace Numbers_Android
                             sb.Append(i).Append(i == 1 ? "" : " ");
                             count++;
                             if (sb.Length > bufferedStreamSize)
-                                {
-                                    FlushToUI(sb.ToString());
-                                    sb.Clear();
-                                }
+                            {
+                                 FlushToUI(sb.ToString());
+                                 sb.Clear();
+                            }
                         }
                         break;
                     default:

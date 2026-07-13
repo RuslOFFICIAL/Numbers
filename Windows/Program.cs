@@ -89,27 +89,28 @@ namespace Numbers_Windows
             int bufferedStreamSize = 1048576; // 1 MB.
             int arrayPoolSize = 65536; // 64 KB.
             int displayLimit = 10000; // Only show first #### numbers in UI.
-			await Task.Run(() =>
+			int count = 0; 
+            await Task.Run(() =>
             {
-                using Stream rawStdout = Console.OpenStandardOutput();
+				using Stream rawStdout = Console.OpenStandardOutput();
                 using BufferedStream stdout = new(rawStdout, bufferedStreamSize);
                 {
-                    byte[] pooledBuffer = ArrayPool<byte>.Shared.Rent(arrayPoolSize);
+					byte[] pooledBuffer = ArrayPool<byte>.Shared.Rent(arrayPoolSize);
                     try
                     {
                         Span<byte> consoleSpan = pooledBuffer.AsSpan();
                         int actualLength = consoleSpan.Length;
                         int consolePos = 0;
-                        int bytesWritten;
+						int bytesWritten;
                         const byte spaceByte = (byte)' ';
 
                         switch(methodNumber)
                         {
                             case 1: // Ascending
                                 consoleSpan[consolePos++] = (byte)'1';
-                                for (int i = 2; i <= chosenNumber; i++)
+                                for (int i = chosenNumber; i >= 1; i--)
                                 {
-                                    if (i > displayLimit)
+                                    if (count >= displayLimit)
                                     {
                                         stdout.Write(consoleSpan[..consolePos]);
                                         consolePos = 0;
@@ -118,6 +119,7 @@ namespace Numbers_Windows
                                         break;
                                     }
                                     stdout.Write(consoleSpan[..consolePos]);
+                                    count++;
                                     consolePos = 0;
 
                                     consoleSpan[consolePos++] = spaceByte;
@@ -126,13 +128,12 @@ namespace Numbers_Windows
                                 }
                                 break;
                             case 2: // Descending.
-                                int count = 0;
                                 Utf8Formatter.TryFormat(chosenNumber, consoleSpan[consolePos..], out bytesWritten);
                                 consolePos += bytesWritten;
 
                                 for (int i = chosenNumber; i >= 1; i--)
                                 {
-									if (count > displayLimit)
+									if (count >= displayLimit)
 									{
 										stdout.Write(consoleSpan[..consolePos]);
 										consolePos = 0;
