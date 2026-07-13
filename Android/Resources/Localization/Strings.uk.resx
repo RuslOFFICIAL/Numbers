@@ -121,7 +121,7 @@
     <value>Помилка при роботі з файловою системою: {ex.Message}</value>
   </data>
   <data name="CreatingDirectoryPrompt" xml:space="preserve">
-    <value>Створення папки "{targetDir}"...</value>
+    <value>\nСтворення папки "{targetDir}"...</value>
   </data>
   <data name="CreatingDirectorySuccessPrompt" xml:space="preserve">
     <value>Папка успішно створена! </value>

@@ -121,7 +121,7 @@
     <value>\nError al trabajar con el sistema de archivos: {ex.Message}</value>
   </data>
   <data name="CreatingDirectoryPrompt" xml:space="preserve">
-    <value>Creando la carpeta "{targetDir}"...</value>
+    <value>\nCreando la carpeta "{targetDir}"...</value>
   </data>
   <data name="CreatingDirectorySuccessPrompt" xml:space="preserve">
     <value>¡Carpeta creada con éxito! </value>

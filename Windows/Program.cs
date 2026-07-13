@@ -77,7 +77,7 @@ namespace Numbers_Windows
             await CreateFileAsync(chosenNumber, methodNumber);
 
             // End.
-            Console.WriteLine(Strings.PressEnterPrompt.Replace("\\n", Environment.NewLine));
+            Console.Write(Strings.PressEnterPrompt.Replace("\\n", Environment.NewLine));
             Console.ReadLine();
         }
 
@@ -107,10 +107,9 @@ namespace Numbers_Windows
                         switch(methodNumber)
                         {
                             case 1: // Ascending
-                                consoleSpan[consolePos++] = (byte)'1';
-                                for (int i = chosenNumber; i >= 1; i--)
+                                for (int i = 1; i <= chosenNumber; i++)
                                 {
-                                    if (count >= displayLimit)
+                                    if (count > displayLimit)
                                     {
                                         stdout.Write(consoleSpan[..consolePos]);
                                         consolePos = 0;
@@ -133,7 +132,7 @@ namespace Numbers_Windows
 
                                 for (int i = chosenNumber; i >= 1; i--)
                                 {
-									if (count >= displayLimit)
+									if (count > displayLimit)
 									{
 										stdout.Write(consoleSpan[..consolePos]);
 										consolePos = 0;
@@ -201,8 +200,8 @@ namespace Numbers_Windows
                     switch (methodNumber)
                     {
                         case 1: // Ascending.
-                            fileMemory.Span[filePos++] = (byte)'1';
-                            for (int i = 2; i <= chosenNumber; i++)
+							fileMemory.Span[filePos++] = (byte)'1';
+							for (int i = 2; i <= chosenNumber; i++)
                             {
                                 if (filePos >= actualLength - fileMargin)
                                 {

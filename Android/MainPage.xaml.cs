@@ -140,7 +140,6 @@ namespace Numbers_Android
 
             // Other processes.
             await ProcessNumbersAsync(chosenNumber, methodNumber);
-            WriteLine("\n");
             SeparatorLine.IsVisible = true;
             await CreateFileAsync(chosenNumber, methodNumber);
 
@@ -173,9 +172,9 @@ namespace Numbers_Android
 				switch (methodNumber)
                 {
                     case 1: // Ascending.
-                        for (int i = chosenNumber; i >= 1;  i++)
+                        for (int i = 1; i <= chosenNumber;  i++)
                         {
-							if (count >= displayLimit)
+							if (count > displayLimit)
                             {
 								FlushToUI(sb.ToString());
 								WriteLine(Strings.OutputTruncatedPrompt);
@@ -193,9 +192,9 @@ namespace Numbers_Android
                         }
                         break;
                     case 2: // Descending.
-						for (int i = chosenNumber; i >= 1; i--)
+						for (int i = chosenNumber - 1; i >= 1; i--)
                         {
-                            if (count >= displayLimit)
+                            if (count > displayLimit)
                             {
                                 FlushToUI(sb.ToString());
                                 WriteLine(Strings.OutputTruncatedPrompt);
@@ -255,8 +254,8 @@ namespace Numbers_Android
                     switch (methodNumber)
                     {
                         case 1: // Ascending.
-                            fileMemory.Span[filePos++] = (byte)'1';
-                            for (int i = 2; i <= chosenNumber; i++)
+							fileMemory.Span[filePos++] = (byte)'1';
+							for (int i = 2; i <= chosenNumber; i++)
                             {
                                 if (filePos >= actualLength - fileMargin)
                                 {
@@ -354,7 +353,9 @@ namespace Numbers_Android
                 {
                     if (!Directory.Exists(targetDir))
                     {
-                        WriteLine(Strings.CreatingDirectoryPrompt.Replace("{targetDir}", targetDir));
+                        WriteLine(Strings.CreatingDirectoryPrompt
+                            .Replace("{targetDir}", targetDir)
+                            .Replace("\\n", Environment.NewLine));
                         
                         // Permission check.
                         var status = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();

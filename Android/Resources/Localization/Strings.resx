@@ -121,7 +121,7 @@
     <value>Error working with the file system: {ex.Message}</value>
   </data>
   <data name="CreatingDirectoryPrompt" xml:space="preserve">
-    <value>Creating a folder "{targetDir}"...</value>
+    <value>\nCreating a folder "{targetDir}"...</value>
   </data>
   <data name="CreatingDirectorySuccessPrompt" xml:space="preserve">
     <value>Folder successfully created! </value>

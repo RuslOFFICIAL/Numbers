@@ -70,7 +70,7 @@ namespace Numbers_Android.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating a folder &quot;{targetDir}&quot;....
+        ///   Looks up a localized string similar to \nCreating a folder &quot;{targetDir}&quot;....
         /// </summary>
         public static string CreatingDirectoryPrompt {
             get {
