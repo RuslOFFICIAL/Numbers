@@ -186,13 +186,13 @@
   <data name="LanguageSettingPrompt" xml:space="preserve">
     <value>Setting the app to language "{lang}"...\n</value>
   </data>
-  <data name="LanguageOptionsPrompt" xml:space="preserve">
-    <value>EN - English\nES - Español\nUK - Українська</value>
-  </data>
   <data name="LanguagePrompt" xml:space="preserve">
     <value>Enter your language: </value>
   </data>
   <data name="LanguageNeutralPrompt" xml:space="preserve">
     <value>Not found language "{lang}". Setting to EN - English...\n</value>
+  </data>
+  <data name="LanguageOptionsPrompt" xml:space="preserve">
+    <value>-&gt; EN - English\n   ES - Español\n   UK - Українська</value>
   </data>
 </root>

@@ -86,11 +86,15 @@ namespace Numbers_Android
                 bool isSupported = LanguageManager.LoadSystemLanguage(userInput);
                 if (!isSupported)
                 {
-                    WriteLine(Strings.LanguageNeutralPrompt.Replace("{lang}", userInput));
+                    WriteLine(Strings.LanguageNeutralPrompt
+                        .Replace("{lang}", userInput)
+                        .Replace("\\n", Environment.NewLine));
                 }
                 else
                 {
-                    WriteLine(Strings.LanguageSettingPrompt.Replace("{lang}", userInput).Replace("\\n", Environment.NewLine));
+                    WriteLine(Strings.LanguageSettingPrompt
+                        .Replace("{lang}", userInput)
+                        .Replace("\\n", Environment.NewLine));
                 }
                 awaitingLang = false;
                 WriteLine(Strings.MethodChoicePrompt.Replace("\\n", Environment.NewLine));

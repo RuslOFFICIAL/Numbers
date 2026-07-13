@@ -160,7 +160,7 @@ namespace Numbers_Windows.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EN - English\nES - Español\nUK - Українська.
+        ///   Looks up a localized string similar to -&gt; EN - English\n   ES - Español\n   UK - Українська.
         /// </summary>
         internal static string LanguageOptionsPrompt {
             get {

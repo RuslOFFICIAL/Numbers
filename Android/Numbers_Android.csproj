@@ -10,9 +10,9 @@
 		<PlatformString>Android</PlatformString>
 
 		<!--- Change the version of the program only here! <ApplicationVersion> always has to be changed by 1! <VersionOnly> have to be either 1 (as true) or 0 (as false)! -->
-		<ApplicationDisplayVersion>5.0.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>5.1.0</ApplicationDisplayVersion>
 		<Version>$(ApplicationDisplayVersion)</Version>
-		<ApplicationVersion>9</ApplicationVersion>
+		<ApplicationVersion>10</ApplicationVersion>
 		<VersionOnly>0</VersionOnly>
 		<NeutralLanguage>en-US</NeutralLanguage>
 

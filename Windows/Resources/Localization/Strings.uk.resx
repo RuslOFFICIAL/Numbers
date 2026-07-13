@@ -150,9 +150,8 @@
   <data name="LanguageNeutralPrompt" xml:space="preserve">
     <value>Мову "{lang}" не знайдено. Встановлюю EN — English...\n</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="LanguageOptionsPrompt" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="LanguageOptionsPrompt" xml:space="preserve">
+    <value>   EN - English\n   ES - Español\n-&gt; UK - Українська</value>
   </data>
   <data name="LanguagePrompt" xml:space="preserve">
     <value>Введіть вашу мову: </value>

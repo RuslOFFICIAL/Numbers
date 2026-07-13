@@ -169,7 +169,7 @@ namespace Numbers_Android.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EN - English\nES - Español\nUK - Українська.
+        ///   Looks up a localized string similar to -&gt; EN - English\n   ES - Español\n   UK - Українська.
         /// </summary>
         public static string LanguageOptionsPrompt {
             get {
