@@ -7,12 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq;
-using Numbers_Windows.Resources;
+using Numbers_Desktop.Resources;
 using System.ComponentModel.DataAnnotations;
 
-namespace Numbers_Windows
+namespace Numbers_Desktop
 {
-    public class Numbers_Windows_Program
+    public class Numbers_Desktop_Program
     {
         public static async Task Main(string[] _)
         {
@@ -280,8 +280,8 @@ namespace Numbers_Windows
             string targetDir = Path.Combine(tempPath, "R&C", "Numbers");
             string fileName = methodNumber switch
             {
-                1 => $"Numbers-Windows_Result_{chosenNumber}-Ascending_{timestamp}.txt",
-                2 => $"Numbers-Windows_Result_{chosenNumber}-Descending_{timestamp}.txt",
+                1 => $"Numbers-Desktop_Result_{chosenNumber}-Ascending_{timestamp}.txt",
+                2 => $"Numbers-Desktop_Result_{chosenNumber}-Descending_{timestamp}.txt",
                 _ => throw new ArgumentException(Strings.InvalidNumberPrompt),
             };
             string filePath = Path.Combine(targetDir, fileName);

@@ -2,7 +2,7 @@
 
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using Numbers_Windows.Resources;
+using Numbers_Desktop.Resources;
 
 class LanguageManager
 {

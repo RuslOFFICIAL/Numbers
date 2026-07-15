@@ -7,19 +7,19 @@
 	    <LangVersion>13.0</LangVersion>
         <Nullable>enable</Nullable>
         <ApplicationIcon>Numbers_logo.ico</ApplicationIcon>
-		<PlatformString>Windows</PlatformString>
+		<PlatformString>Desktop</PlatformString>
 
 		<!--- Change the version of the program only here! <VersionOnly> have to be either 1 (as true) or 0 (as false)! -->
-		<AppVersion>5.4.0.1</AppVersion>
+		<AppVersion>6.0.0.0</AppVersion>
 		<Version>$(AppVersion)</Version>
-		<VersionOnly>1</VersionOnly>
+		<VersionOnly>0</VersionOnly>
 		
 		<Product>Numbers</Product>
 		<AssemblyTitle>Numbers</AssemblyTitle>
         <Authors>Rusl</Authors>
 		<Company><![CDATA[R&C]]></Company>
 		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-	    <AssemblyName>Numbers_$(AppVersion)_Windows</AssemblyName>
+	    <AssemblyName>Numbers_$(AppVersion)_Desktop</AssemblyName>
 	    <NeutralLanguage>en-US</NeutralLanguage>
 	</PropertyGroup>
 
@@ -41,16 +41,16 @@
 	<ItemGroup>
 	  <EmbeddedResource Update="Resources\Localization\Strings.es.resx">
 	    <Generator></Generator>
-	    <CustomToolNamespace>Numbers_Windows.Resources</CustomToolNamespace>
+	    <CustomToolNamespace>Numbers_Desktop.Resources</CustomToolNamespace>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Resources\Localization\Strings.uk.resx">
 	    <Generator></Generator>
-	    <CustomToolNamespace>Numbers_Windows.Resources</CustomToolNamespace>
+	    <CustomToolNamespace>Numbers_Desktop.Resources</CustomToolNamespace>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Resources\Localization\Strings.resx">
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-	    <CustomToolNamespace>Numbers_Windows.Resources</CustomToolNamespace>
+	    <CustomToolNamespace>Numbers_Desktop.Resources</CustomToolNamespace>
 	  </EmbeddedResource>
 	</ItemGroup>
 
