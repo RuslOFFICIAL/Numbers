@@ -80,13 +80,14 @@ namespace Numbers_Android
 
         private async void OnInputSubmitted(object sender, EventArgs e)
         {
-            // Insert number.
+            // User input.
             string userInput = TerminalInput.Text?.Trim() ?? "";
             TerminalInput.Text = string.Empty;
             WriteInline($"> {userInput}\n");
 
             if (awaitingLang)
             {
+                // Lang.
                 bool isSupported = LanguageManager.LoadSystemLanguage(userInput);
                 if (!isSupported)
                 {
