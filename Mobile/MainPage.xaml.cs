@@ -16,8 +16,8 @@ namespace Numbers_Mobile
     public partial class MainPage : ContentPage
     {
 
-        // Set variables
-        private readonly int maxNumber = 100000000; // Changing the value of maxNumber may affect the performance of the program! 
+		// Set variables
+		private readonly int maxNumber = 100000000; // Changing the value of maxNumber may affect the performance of the program! 
         private int chosenNumber;
         private int methodNumber;
         private bool awaitingMethod = true;
@@ -32,8 +32,8 @@ namespace Numbers_Mobile
 
             InitializeComponent();
 
-            // Set variables.
-            var attributes = Assembly.GetExecutingAssembly()
+			// Set variables.
+			var attributes = Assembly.GetExecutingAssembly()
                 .GetCustomAttributes<AssemblyMetadataAttribute>()
                 .ToDictionary(a => a.Key, a => a.Value);
             var versionNumber = attributes.GetValueOrDefault("ApplicationDisplayVersion", "Unknown");
@@ -141,10 +141,10 @@ namespace Numbers_Mobile
 
             // Other processes.
             await ProcessNumbersAsync(chosenNumber, methodNumber);
-            SeparatorLine.IsVisible = true;
-            await CreateFileAsync(chosenNumber, methodNumber);
+			GetSeparator();
+			await CreateFileAsync(chosenNumber, methodNumber);
 
-            // Newxt cycle.
+            // Next cycle.
             awaitingMethod = true;
             TerminalInput.IsEnabled = true;
             WriteLine(Strings.NewCyclePrompt.Replace("\\n", Environment.NewLine));
@@ -395,7 +395,19 @@ namespace Numbers_Mobile
                 WriteLine(Strings.SaveFileCancelledPrompt);
             }
         }
-    }
+
+        private void GetSeparator()
+        {
+            // Get screen width
+			var mainDisplayInfo = DeviceDisplay.Current.MainDisplayInfo;
+			double widthInUnits = mainDisplayInfo.Width / mainDisplayInfo.Density;
+			int characterCount = (int)((widthInUnits - 20) / 5.0);
+
+			// Print the separator.
+			string separator = new('-', characterCount);
+            WriteLine(separator);
+		}
+	}
 
 	public static class Constants
 	{
