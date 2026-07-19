@@ -10,3 +10,6 @@ Version (e.g. N1.N2.N3-(Platform)) meaning:
 - N1 means a noticeable-big change for all platforms.
 - N2 means a small change for all platforms which can be noticed in the code.
 - N3-(Platform) means a change only for some specific platform.
+
+Dependencies:
+1. Libicu (icu-libs), if you are on Linux.
