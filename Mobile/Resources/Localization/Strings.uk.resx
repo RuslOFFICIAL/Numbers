@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CreatingDirectoryErrorPrompt" xml:space="preserve">
+    <value>Помилка при роботі з файловою системою: {ex.Message}</value>
+  </data>
+  <data name="CreatingDirectoryPrompt" xml:space="preserve">
+    <value>\nСтворення папки "{targetDir}"...</value>
+  </data>
+  <data name="CreatingDirectorySuccessPrompt" xml:space="preserve">
+    <value>Папка успішно створена! </value>
+  </data>
+  <data name="EnterNumberAgainPrompt" xml:space="preserve">
+    <value>Введіть число: </value>
+  </data>
+  <data name="EnterNumberPrompt" xml:space="preserve">
+    <value>Введіть число (повинно бути в діапазоні від 1 до {maxNumber:N0}): </value>
+  </data>
+  <data name="FileDirectoryPrompt" xml:space="preserve">
+    <value>Файл буде збережено в "{targetDir}". </value>
+  </data>
+  <data name="FilePathPrompt" xml:space="preserve">
+    <value>Успішно збережено! Шлях до файлу:\n{filePath}</value>
+  </data>
+  <data name="FileSizePrompt" xml:space="preserve">
+    <value>Розмір файлу: {fileSizeInBytes:N0} байт ({fileSizeInMB:F2} MB). </value>
+  </data>
+  <data name="GenerationAndOutputPrompt" xml:space="preserve">
+    <value>\nГенерація та вивід чисел у консоль. Будь ласка, зачекайте...</value>
+  </data>
+  <data name="SaveFileCancelledPrompt" xml:space="preserve">
+    <value>Запис скасовано.</value>
+  </data>
+  <data name="SaveFileChoicePrompt" xml:space="preserve">
+    <value>Зберегти ці числа у файл "{fileName}"? </value>
+  </data>
+  <data name="YesPrompt" xml:space="preserve">
+    <value>Так</value>
+  </data>
+  <data name="SaveFilePrompt" xml:space="preserve">
+    <value>Зберегти файл?</value>
+  </data>
+  <data name="WrongNumberPrompt" xml:space="preserve">
+    <value>Число не підходить (повинно бути в діапазоні від 1 до {maxNumber:N0}). Спробуйте знову.</value>
+  </data>
+  <data name="NoPrompt" xml:space="preserve">
+    <value>Ні</value>
+  </data>
+  <data name="ErrorAccessPrompt" xml:space="preserve">
+    <value>Спробуйте надати програмі Numbers дозвіл на доступ до усіх файлів.</value>
+  </data>
+  <data name="NewCyclePrompt" xml:space="preserve">
+    <value>\nГотово! Введіть наступне число методу та наступне число для нового циклу:</value>
+  </data>
+  <data name="SaveFileProcessPrompt" xml:space="preserve">
+    <value>Запис у файл...</value>
+  </data>
+  <data name="InvalidNumberPrompt" xml:space="preserve">
+    <value>Число не підходить.</value>
+  </data>
+  <data name="MethodChoicePrompt" xml:space="preserve">
+    <value>Виберіть, який метод вам потрібно:\n1. Збільшення (1 2 ... 9 10)\n2. Зменшення (10 9 ... 2 1)\nВведіть число методу: </value>
+  </data>
+  <data name="MethodChoiceWrongPrompt" xml:space="preserve">
+    <value>Число не підходить (повинно бути в діапазоні від 1 до 2). Спробуйте знову.\nВведіть число: </value>
+  </data>
+  <data name="OutputTruncatedPrompt" xml:space="preserve">
+    <value>... (Вивід скорочено для продуктивності)</value>
+  </data>
+  <data name="LanguageSettingPrompt" xml:space="preserve">
+    <value>Встановлення мови "{lang}"...\n</value>
+  </data>
+  <data name="LanguagePrompt" xml:space="preserve">
+    <value>Введіть вашу мову: </value>
+  </data>
+  <data name="LanguageNeutralPrompt" xml:space="preserve">
+    <value>Мову "{lang}" не знайдено. Встановлюю EN — English...\n</value>
+  </data>
+  <data name="LanguageOptionsPrompt" xml:space="preserve">
+    <value>\tEN - English\n\tES - Español\n-&gt;\tUK - Українська</value>
+  </data>
+  <data name="ErrorPermissionPrompt" xml:space="preserve">
+    <value>Error: Se denegó el permiso para escribir en el almacenamiento.</value>
+  </data>
+  <data name="VersionPrompt" xml:space="preserve">
+    <value>Version {version}\n\n</value>
+  </data>
+</root>

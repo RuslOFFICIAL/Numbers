@@ -10,15 +10,15 @@ set "FileDirectoryLinux=%SourceDirectory%\bin\Release\net9.0\linux-x64\publish"
 
 REM Removing other EXE files.
 echo Deleting old EXE files...
-for %%f in ("%DestinationDirectory%\Numbers_*_Desktop*") do (
+for %%f in ("%DestinationDirectory%\Numbers_*_Desktop-*") do (
 	echo Removing file: "%%~nxf"...
 	del "%%f" /f /q
 )
-for %%f in ("%FileDirectoryWindows%\Numbers_*_Desktop.exe") do (
+for %%f in ("%FileDirectoryWindows%\Numbers_*_Desktop-Windows.exe") do (
 	echo Removing file: "%%~nxf"...
 	del "%%f" /f /q
 )
-for %%f in ("%FileDirectoryLinux%\Numbers_*_Desktop") do (
+for %%f in ("%FileDirectoryLinux%\Numbers_*_Desktop-Linux") do (
 	echo Removing file: "%%~nxf"...
 	del "%%f" /f /q
 )
@@ -34,24 +34,15 @@ echo.&echo Compiling Linux file...
 dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true
 echo.&echo Build complete.
 
-REM Choice.
-echo It may need to be done as an Administrator.
-choice /c YN /m "Do you want to copy the files to '%DestinationDirectory%'?"
-if %errorlevel%==1 goto Copy
-if %errorlevel%==2 goto NoCopy
-
-:Copy
-for %%f in ("%FileDirectoryWindows%\Numbers_*_Desktop.exe") do (
+REM Copy.
+echo.&echo Copying files...
+for %%f in ("%FileDirectoryWindows%\Numbers_*_Desktop-Windows.exe") do (
 	copy "%%f" "%DestinationDirectory%"
 )
-for %%f in ("%FileDirectoryLinux%\Numbers_*_Desktop") do (
+for %%f in ("%FileDirectoryLinux%\Numbers_*_Desktop-Linux") do (
 	copy "%%f" "%DestinationDirectory%"
 )
 echo Copied.
-goto End
-
-:NoCopy
-echo Not copied.
 goto End
 
 :End

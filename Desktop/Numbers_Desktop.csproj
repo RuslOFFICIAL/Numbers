@@ -1,6 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<!--- Change the version of the program only here! <VersionOnly> have to be either 1 (as true) or 0 (as false)! -->
+		<AppVersion>6.1.0</AppVersion>
+		<Version>$(AppVersion)</Version>
+		<VersionOnly>0</VersionOnly>
+		
+		<PlatformSuffix>Unknown</PlatformSuffix>
+		<PlatformSuffix Condition="$(RuntimeIdentifier.Contains('win'))">Windows</PlatformSuffix>
+		<PlatformSuffix Condition="$(RuntimeIdentifier.Contains('linux'))">Linux</PlatformSuffix>
+
+		<AssemblyName>Numbers_$(AppVersion)_Desktop-$(PlatformSuffix)</AssemblyName>
 		<OutputType>Exe</OutputType>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -8,18 +18,12 @@
         <Nullable>enable</Nullable>
         <ApplicationIcon>Numbers_logo.ico</ApplicationIcon>
 		<PlatformString>Desktop</PlatformString>
-
-		<!--- Change the version of the program only here! <VersionOnly> have to be either 1 (as true) or 0 (as false)! -->
-		<AppVersion>6.0.0.0</AppVersion>
-		<Version>$(AppVersion)</Version>
-		<VersionOnly>0</VersionOnly>
 		
 		<Product>Numbers</Product>
 		<AssemblyTitle>Numbers</AssemblyTitle>
         <Authors>Rusl</Authors>
 		<Company><![CDATA[R&C]]></Company>
 		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-	    <AssemblyName>Numbers_$(AppVersion)_Desktop</AssemblyName>
 	    <NeutralLanguage>en-US</NeutralLanguage>
 	</PropertyGroup>
 
