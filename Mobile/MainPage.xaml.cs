@@ -17,7 +17,7 @@ namespace Numbers_Mobile
     {
 
         // Set variables
-        private readonly int maxNumber = 100000001; // Changing the value of maxNumber may affect the performance of the program! 
+        private readonly int maxNumber = 100000000; // Changing the value of maxNumber may affect the performance of the program! 
         private int chosenNumber;
         private int methodNumber;
         private bool awaitingMethod = true;
@@ -192,10 +192,9 @@ namespace Numbers_Mobile
                                 sb.Clear();
                             }
                         }
-						WriteLine("\n");
 						break;
                     case 2: // Descending.
-						for (int i = chosenNumber - 1; i >= 1; i--)
+						for (int i = chosenNumber; i >= 1; i--)
                         {
                             if (count > displayLimit)
                             {
@@ -221,7 +220,7 @@ namespace Numbers_Mobile
 
                 if (!isTruncated && sb.Length > 0)
                 {
-                    FlushToUI(sb.ToString());
+                    FlushToUI(sb.ToString() + Environment.NewLine);
                 }
             });
         }

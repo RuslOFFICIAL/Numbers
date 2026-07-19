@@ -108,7 +108,8 @@ namespace Numbers_Desktop
                         switch(methodNumber)
                         {
                             case 1: // Ascending
-                                for (int i = 1; i <= chosenNumber; i++)
+								consoleSpan[consolePos++] = (byte)'1';
+								for (int i = 2; i <= chosenNumber; i++)
                                 {
                                     if (count > displayLimit)
                                     {
@@ -131,7 +132,7 @@ namespace Numbers_Desktop
                                 Utf8Formatter.TryFormat(chosenNumber, consoleSpan[consolePos..], out bytesWritten);
                                 consolePos += bytesWritten;
 
-                                for (int i = chosenNumber; i >= 1; i--)
+                                for (int i = chosenNumber - 1; i >= 1; i--)
                                 {
 									if (count > displayLimit)
 									{

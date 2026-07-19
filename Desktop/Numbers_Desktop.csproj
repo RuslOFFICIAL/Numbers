@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<!--- Change the version of the program only here! <VersionOnly> have to be either 1 (as true) or 0 (as false)! -->
-		<AppVersion>6.1.0</AppVersion>
+		<AppVersion>6.2.0</AppVersion>
 		<Version>$(AppVersion)</Version>
 		<VersionOnly>0</VersionOnly>
 		
