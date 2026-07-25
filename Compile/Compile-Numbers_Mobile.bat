@@ -2,12 +2,25 @@
 cd /d "%~dp0"
 setlocal enabledelayedexpansion
 
+REM .conf files.
+set "ConfigPath=%~dp0Mobile-Signature_Info.conf"
+
+if not exist "%ConfigPath%" (
+	endlocal
+	echo Error: Mobile-Signature_Info.conf not found!&echo Check if you have that file or follow the instruction in Mobile-Signature_Info.conf.example!
+	pause
+	exit /b
+)
+
+for /f "usebackq eol=# tokens=1,2 delims==" %%A in ("%ConfigPath%") do set "%%A=%%~B"
+
 REM Variables.
 set "SourceDirectory=%~dp0..\Mobile"
 set "DestinationDirectory=%~dp0..\Releases"
 set "FileDirectoryAndroid=%SourceDirectory%\bin\Release\net9.0-android\publish"
 set "CsprojPath=%SourceDirectory%\Numbers_Mobile.csproj"
-set "AndroidKeystorePath=%~dp0..\..\..\Android Keystore"
+
+for /f "usebackq tokens=1,2 delims==" %%a in ("%AndroidSignatureInfoPath%") do set "%%a=%%~b"
 
 REM Removing other APK files.
 echo Deleting old APK files...
@@ -21,23 +34,16 @@ for %%f in ("%FileDirectoryAndroid%\*.apk") do (
 )
 echo.
 
-REM Load configuration from text file.
-for /f "usebackq tokens=1,2 delims==" %%a in ("%AndroidKeystorePath%\SignatureInfo_1.md") do (
-	if "%%a"=="alias" set "KeyAlias=%%b"
-	if "%%a"=="storepass" set "KeyStorePass=%%b"
-	if "%%a"=="keypass" set "KeyKeyPass=%%b"
-)
-
 REM Change to the directory containing project file (.csproj)
 cd /d %SourceDirectory%
 
 REM Run the publish command.
 echo Compiling Android APK...
 dotnet publish -f net9.0-android -c Release -p:AndroidPackageFormat=apk ^
-	-p:AndroidSigningKeyStore="%AndroidKeystorePath%\RAndC_key.keystore" ^
-	-p:AndroidSigningKeyAlias="%KeyAlias%" ^
-	-p:AndroidSigningKeyPass="%KeyKeyPass%" ^
-	-p:AndroidSigningStorePass="%KeyStorePass%"
+	-p:AndroidSigningKeyStore="%AndroidKeystorePath%" ^
+	-p:AndroidSigningKeyAlias="%AndroidKeyAlias%" ^
+	-p:AndroidSigningKeyPass="%AndroidKeypass%" ^
+	-p:AndroidSigningStorePass="%AndroidStorepass%"
 echo.&echo Build complete.
 
 REM Copy.
