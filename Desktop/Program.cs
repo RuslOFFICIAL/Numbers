@@ -16,14 +16,6 @@ namespace Numbers_Desktop
     {
         public static async Task Main(string[] _)
         {
-            // User culture.
-            System.Globalization.CultureInfo currentCulture = System.Globalization.CultureInfo.CurrentUICulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = currentCulture;
-            System.Threading.Thread.CurrentThread.CurrentUICulture = currentCulture;
-            System.Globalization.CultureInfo.DefaultThreadCurrentCulture = currentCulture;
-            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = currentCulture;
-            
-            
             // UI setup.
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
@@ -53,32 +45,41 @@ namespace Numbers_Desktop
                 .Replace("\\n", Environment.NewLine)
                 .Replace("{version}", version)
                 .Replace("{menuASCII}", menuASCII));
-            LanguageManager.LoadSystemLanguage();
 
-            // Method.
-            Console.Write(Strings.MethodChoicePrompt.Replace("\\n", Environment.NewLine));
-
-            while (!int.TryParse(Console.ReadLine(), out methodNumber) || methodNumber < 1 || methodNumber > 2)
+            while (true)
             {
-                Console.Write(Strings.MethodChoiceWrongPrompt.Replace("\\n", Environment.NewLine));
+                // User culture.
+                System.Globalization.CultureInfo currentCulture = System.Globalization.CultureInfo.CurrentUICulture;
+                System.Threading.Thread.CurrentThread.CurrentCulture = currentCulture;
+                System.Threading.Thread.CurrentThread.CurrentUICulture = currentCulture;
+                System.Globalization.CultureInfo.DefaultThreadCurrentCulture = currentCulture;
+                System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = currentCulture;
+                LanguageManager.LoadSystemLanguage();
+
+                // Method.
+                Console.Write(Strings.MethodChoicePrompt.Replace("\\n", Environment.NewLine));
+
+                while (!int.TryParse(Console.ReadLine(), out methodNumber) || methodNumber < 1 || methodNumber > 2)
+                {
+                    Console.Write(Strings.MethodChoiceWrongPrompt.Replace("\\n", Environment.NewLine));
+                }
+
+                // Insert number.
+                Console.Write(Strings.EnterNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
+
+                while (!int.TryParse(Console.ReadLine(), out chosenNumber) || chosenNumber < 1 || chosenNumber > maxNumber)
+                {
+                    Console.WriteLine(Strings.WrongNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
+                    Console.Write(Strings.EnterNumberAgainPrompt);
+                }
+
+                // Launching other processes.
+                await ProcessNumbersAsync(chosenNumber, methodNumber);
+                await CreateFileAsync(chosenNumber, methodNumber);
+
+				// New cycle.
+				Console.WriteLine(Strings.NewCyclePrompt.Replace("\\n", Environment.NewLine));
             }
-
-            // Insert number.
-            Console.Write(Strings.EnterNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
-
-            while (!int.TryParse(Console.ReadLine(), out chosenNumber) || chosenNumber < 1 || chosenNumber > maxNumber)
-            {
-                Console.WriteLine(Strings.WrongNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
-                Console.Write(Strings.EnterNumberAgainPrompt);
-            }
-
-            // Launching other processes.
-            await ProcessNumbersAsync(chosenNumber, methodNumber);
-            await CreateFileAsync(chosenNumber, methodNumber);
-
-            // End.
-            Console.Write(Strings.PressEnterPrompt.Replace("\\n", Environment.NewLine));
-            Console.ReadLine();
         }
 
         private static async Task ProcessNumbersAsync(int chosenNumber, int methodNumber)

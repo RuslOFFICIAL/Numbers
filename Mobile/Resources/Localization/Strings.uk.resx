@@ -166,7 +166,7 @@
     <value>Спробуйте надати програмі Numbers дозвіл на доступ до усіх файлів.</value>
   </data>
   <data name="NewCyclePrompt" xml:space="preserve">
-    <value>\nГотово! Введіть наступне число методу та наступне число для нового циклу:</value>
+    <value>\nГотово! Новий цикл...\n</value>
   </data>
   <data name="SaveFileProcessPrompt" xml:space="preserve">
     <value>Запис у файл...</value>

@@ -168,8 +168,8 @@
   <data name="OutputTruncatedPrompt" xml:space="preserve">
     <value>... (Вивід скорочено для продуктивності)</value>
   </data>
-  <data name="PressEnterPrompt" xml:space="preserve">
-    <value>\nНатисніть [Enter] щоб закрити програму...</value>
+  <data name="NewCyclePrompt" xml:space="preserve">
+    <value>\nГотово! Новий цикл...\n</value>
   </data>
   <data name="SaveFileCancelledPrompt" xml:space="preserve">
     <value>Запис скасовано.</value>

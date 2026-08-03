@@ -168,8 +168,8 @@
   <data name="OutputTruncatedPrompt" xml:space="preserve">
     <value>... (Output truncated for performance)</value>
   </data>
-  <data name="PressEnterPrompt" xml:space="preserve">
-    <value>\nPress [Enter] to close the app...</value>
+  <data name="NewCyclePrompt" xml:space="preserve">
+    <value>\nDone! New cycle...\n</value>
   </data>
   <data name="SaveFileCancelledPrompt" xml:space="preserve">
     <value>Recording cancelled.</value>

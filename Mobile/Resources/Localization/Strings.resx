@@ -166,7 +166,7 @@
     <value>Try giving Numbers permission to access all files.</value>
   </data>
   <data name="NewCyclePrompt" xml:space="preserve">
-    <value>\nDone! Enter the new method number and new number for the new cycle:</value>
+    <value>\nDone! New cycle...\n</value>
   </data>
   <data name="SaveFileProcessPrompt" xml:space="preserve">
     <value>File entry...</value>

@@ -223,7 +223,7 @@ namespace Numbers_Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \nDone! Enter the new method number and new number for the new cycle:.
+        ///   Looks up a localized string similar to \nDone! New cycle...\n.
         /// </summary>
         public static string NewCyclePrompt {
             get {

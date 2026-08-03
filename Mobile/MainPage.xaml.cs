@@ -53,12 +53,12 @@ namespace Numbers_Mobile
             WriteLine(Strings.VersionPrompt
                 .Replace("\\n", Environment.NewLine)
                 .Replace("{version}", version));
-            WriteLine(Strings.LanguageOptionsPrompt
+			WriteLine(Strings.LanguageOptionsPrompt
                 .Replace("\\n", Environment.NewLine)
                 .Replace("\\t", Constants.ConsoleTab));
-            WriteLine(Strings.LanguagePrompt);
-        }
-        private void WriteLine(string text)
+			WriteLine(Strings.LanguagePrompt);
+		}
+		private void WriteLine(string text)
         {
             //Console.WriteLine() command.
             MainThread.BeginInvokeOnMainThread(() =>
@@ -85,7 +85,7 @@ namespace Numbers_Mobile
             TerminalInput.Text = string.Empty;
             WriteInline($"> {userInput}\n");
 
-            if (awaitingLang)
+			if (awaitingLang)
             {
                 // Lang.
                 bool isSupported = LanguageManager.LoadSystemLanguage(userInput);
@@ -145,9 +145,17 @@ namespace Numbers_Mobile
 			await CreateFileAsync(chosenNumber, methodNumber);
 
             // Next cycle.
+            awaitingLang = true;
             awaitingMethod = true;
-            TerminalInput.IsEnabled = true;
-            WriteLine(Strings.NewCyclePrompt.Replace("\\n", Environment.NewLine));
+
+			// Text.
+			WriteLine(Strings.NewCyclePrompt.Replace("\\n", Environment.NewLine));
+			WriteLine(Strings.LanguageOptionsPrompt
+                .Replace("\\n", Environment.NewLine)
+                .Replace("\\t", Constants.ConsoleTab));
+			WriteLine(Strings.LanguagePrompt);
+
+			TerminalInput.IsEnabled = true;
         }
 
         private async Task ProcessNumbersAsync(int chosenNumber, int methodNumber)

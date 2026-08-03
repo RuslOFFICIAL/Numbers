@@ -168,8 +168,8 @@
   <data name="OutputTruncatedPrompt" xml:space="preserve">
     <value>... (Salida truncada por rendimiento)</value>
   </data>
-  <data name="PressEnterPrompt" xml:space="preserve">
-    <value>\nPresione [Intro] para cerrar la aplicación...</value>
+  <data name="NewCyclePrompt" xml:space="preserve">
+    <value>\n¡Hecho! Nuevo ciclo...\n</value>
   </data>
   <data name="SaveFileCancelledPrompt" xml:space="preserve">
     <value>Guardado cancelado.</value>

@@ -205,20 +205,20 @@ namespace Numbers_Desktop.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to \nDone! New cycle...\n.
+        /// </summary>
+        internal static string NewCyclePrompt {
+            get {
+                return ResourceManager.GetString("NewCyclePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ... (Output truncated for performance).
         /// </summary>
         internal static string OutputTruncatedPrompt {
             get {
                 return ResourceManager.GetString("OutputTruncatedPrompt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to \nPress [Enter] to close the app....
-        /// </summary>
-        internal static string PressEnterPrompt {
-            get {
-                return ResourceManager.GetString("PressEnterPrompt", resourceCulture);
             }
         }
         
