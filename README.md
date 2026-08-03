@@ -12,4 +12,4 @@ Version (e.g. N1.N2.N3-(Platform)) meaning:
 - N3-(Platform) means a change only for some specific platform.
 
 Dependencies:
-1. Libicu (icu-libs), if you are on Linux.
+1. Libicu (icu-libs) package.
