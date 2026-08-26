@@ -41,6 +41,11 @@ for %%f in ("%FileDirectoryWindows%\Numbers_*_Desktop-Windows.exe") do (
 )
 for %%f in ("%FileDirectoryLinux%\Numbers_*_Desktop-Linux") do (
 	copy "%%f" "%DestinationDirectory%"
+	
+	echo Applying +x permission to Linux binary...
+	pushd "%DestinationDirectory%"
+	bash -c "chmod +x '%%~nxf'"
+	popd
 )
 echo Copied.
 goto End
