@@ -12,7 +12,13 @@ class LanguageManager
         Console.Write(Strings.LanguagePrompt);
         string? lang = Console.ReadLine()?.ToLowerInvariant();
 
-        switch (lang)
+		if (lang == "exit")
+		{
+            Console.WriteLine(Strings.ExitPrompt.Replace("\\n", Environment.NewLine));
+			Environment.Exit(0);
+		}
+
+		switch (lang)
         {
             case "uk":
             case "en":

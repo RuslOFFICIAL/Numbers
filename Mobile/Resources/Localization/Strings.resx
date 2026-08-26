@@ -199,6 +199,12 @@
     <value>Error: Permission to write to storage was denied.</value>
   </data>
   <data name="VersionPrompt" xml:space="preserve">
-    <value>Version {version}\n\n</value>
+    <value>Version {version}</value>
+  </data>
+  <data name="ExitPrompt" xml:space="preserve">
+    <value>\nExiting the program...</value>
+  </data>
+  <data name="InfoPrompt" xml:space="preserve">
+    <value>Enter "exit" to quit.\n\n</value>
   </data>
 </root>

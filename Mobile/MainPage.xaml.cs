@@ -15,7 +15,6 @@ namespace Numbers_Mobile
 {
     public partial class MainPage : ContentPage
     {
-
 		// Set variables
 		private readonly int maxNumber = 100000000; // Changing the value of maxNumber may affect the performance of the program! 
         private int chosenNumber;
@@ -50,9 +49,9 @@ namespace Numbers_Mobile
             string version = $"{versionNumber}{versionOnlyString}";
 
             // Print text.
-            WriteLine(Strings.VersionPrompt
-                .Replace("\\n", Environment.NewLine)
-                .Replace("{version}", version));
+            WriteLine(Strings.VersionPrompt.Replace("{version}", version));
+            WriteLine(Strings.InfoPrompt.Replace("\\n", Environment.NewLine));
+
 			WriteLine(Strings.LanguageOptionsPrompt
                 .Replace("\\n", Environment.NewLine)
                 .Replace("\\t", Constants.ConsoleTab));
@@ -82,7 +81,9 @@ namespace Numbers_Mobile
         {
             // User input.
             string userInput = TerminalInput.Text?.Trim() ?? "";
-            TerminalInput.Text = string.Empty;
+			CheckExit(userInput);
+
+			TerminalInput.Text = string.Empty;
             WriteInline($"> {userInput}\n");
 
 			if (awaitingLang)
@@ -414,6 +415,15 @@ namespace Numbers_Mobile
 			// Print the separator.
 			string separator = new('-', characterCount);
             WriteLine(separator);
+		}
+
+		private void CheckExit(string? input)
+		{
+			if (input?.Trim().Equals("exit", StringComparison.OrdinalIgnoreCase) == true)
+			{
+				WriteLine(Strings.ExitPrompt.Replace("\\n", Environment.NewLine));
+				Microsoft.Maui.Controls.Application.Current?.Quit();
+			}
 		}
 	}
 

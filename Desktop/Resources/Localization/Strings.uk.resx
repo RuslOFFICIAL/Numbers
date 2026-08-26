@@ -184,9 +184,15 @@
     <value>Запис у файл...</value>
   </data>
   <data name="VersionPrompt" xml:space="preserve">
-    <value>{menuASCII}\nVersion {version}\n\n</value>
+    <value>{menuASCII}\nVersion {version}</value>
   </data>
   <data name="WrongNumberPrompt" xml:space="preserve">
     <value>Число не підходить (повинно бути в діапазоні від 1 до {maxNumber:N0}). Спробуйте знову.</value>
+  </data>
+  <data name="InfoPrompt" xml:space="preserve">
+    <value>Введіть "exit", щоб вийти.\n\n</value>
+  </data>
+  <data name="ExitPrompt" xml:space="preserve">
+    <value>\nЗакриваємо програму...</value>
   </data>
 </root>

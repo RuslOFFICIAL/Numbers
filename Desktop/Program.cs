@@ -45,6 +45,7 @@ namespace Numbers_Desktop
                 .Replace("\\n", Environment.NewLine)
                 .Replace("{version}", version)
                 .Replace("{menuASCII}", menuASCII));
+            Console.WriteLine(Strings.InfoPrompt.Replace("\\n", Environment.NewLine));
 
             while (true)
             {
@@ -58,23 +59,35 @@ namespace Numbers_Desktop
 
                 // Method.
                 Console.Write(Strings.MethodChoicePrompt.Replace("\\n", Environment.NewLine));
+				string? methodInput;
+				while (true)
+				{
+					methodInput = Console.ReadLine();
+					CheckExit(methodInput);
+					if (int.TryParse(methodInput, out methodNumber) && methodNumber >= 1 && methodNumber <= 2)
+					{
+						break;
+					}
+					Console.Write(Strings.MethodChoiceWrongPrompt.Replace("\\n", Environment.NewLine));
+				}
 
-                while (!int.TryParse(Console.ReadLine(), out methodNumber) || methodNumber < 1 || methodNumber > 2)
-                {
-                    Console.Write(Strings.MethodChoiceWrongPrompt.Replace("\\n", Environment.NewLine));
-                }
+				// Insert number.
+				Console.Write(Strings.EnterNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
+				string? numberInput;
+				while (true)
+				{
+					numberInput = Console.ReadLine();
+					CheckExit(numberInput);
+					if (int.TryParse(numberInput, out chosenNumber) && chosenNumber >= 1 && chosenNumber <= maxNumber)
+					{
+						break;
+					}
+					Console.WriteLine(Strings.WrongNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
+					Console.Write(Strings.EnterNumberAgainPrompt);
+				}
 
-                // Insert number.
-                Console.Write(Strings.EnterNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
-
-                while (!int.TryParse(Console.ReadLine(), out chosenNumber) || chosenNumber < 1 || chosenNumber > maxNumber)
-                {
-                    Console.WriteLine(Strings.WrongNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
-                    Console.Write(Strings.EnterNumberAgainPrompt);
-                }
-
-                // Launching other processes.
-                await ProcessNumbersAsync(chosenNumber, methodNumber);
+				// Launching other processes.
+				await ProcessNumbersAsync(chosenNumber, methodNumber);
                 await CreateFileAsync(chosenNumber, methodNumber);
 
 				// New cycle.
@@ -304,11 +317,14 @@ namespace Numbers_Desktop
                 .Replace("{fileSizeInMB:F2}", fileSizeInMB.ToString("F2")));
             Console.WriteLine(Strings.FileDirectoryPrompt.Replace("{targetDir}", targetDir));
             Console.WriteLine(Strings.SaveFileOptionsPrompt.Replace("\\n", Environment.NewLine));
-            Console.Write(Strings.SaveFileChoicePrompt.Replace("{fileName}", fileName));
-            string fileResponse = Console.ReadLine()?.Trim().ToLower() ?? "";
 
-            // Choice.
-            if (fileResponse == "y" || fileResponse == "yes")
+            Console.Write(Strings.SaveFileChoicePrompt.Replace("{fileName}", fileName));
+			string fileResponse = Console.ReadLine() ?? "";
+			CheckExit(fileResponse);
+			fileResponse = fileResponse.Trim().ToLower();
+
+			// Choice.
+			if (fileResponse == "y" || fileResponse == "yes")
             {
                 // Creating directory and file.
                 try
@@ -335,7 +351,16 @@ namespace Numbers_Desktop
                 Console.WriteLine(Strings.SaveFileCancelledPrompt);
             }
         }
-    }
+
+		private static void CheckExit(string? input)
+		{
+			if (input?.Trim().Equals("exit", StringComparison.OrdinalIgnoreCase) == true)
+			{
+                Console.WriteLine(Strings.ExitPrompt.Replace("\\n", Environment.NewLine));
+				Environment.Exit(0);
+			}
+		}
+	}
 }
 
 // All ASCII arts are from https://patorjk.com/software/taag/#p=display&f=Graffiti&t=N+u+m+b+e+r+s&x=none&v=4&h=4&w=80&we=false

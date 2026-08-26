@@ -184,9 +184,15 @@
     <value>File entry...</value>
   </data>
   <data name="VersionPrompt" xml:space="preserve">
-    <value>{menuASCII}\nVersion {version}\n\n</value>
+    <value>{menuASCII}\nVersion {version}</value>
   </data>
   <data name="WrongNumberPrompt" xml:space="preserve">
     <value>The number is not suitable (must be in the range of 1 to {maxNumber:N0}). Try again.</value>
+  </data>
+  <data name="InfoPrompt" xml:space="preserve">
+    <value>Enter "exit" to quit.\n\n</value>
+  </data>
+  <data name="ExitPrompt" xml:space="preserve">
+    <value>\nExiting the program...</value>
   </data>
 </root>

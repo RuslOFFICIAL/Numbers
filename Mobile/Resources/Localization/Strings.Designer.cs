@@ -124,6 +124,15 @@ namespace Numbers_Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to \nExiting the program....
+        /// </summary>
+        public static string ExitPrompt {
+            get {
+                return ResourceManager.GetString("ExitPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The file will be saved in &quot;{targetDir}&quot;. .
         /// </summary>
         public static string FileDirectoryPrompt {
@@ -156,6 +165,15 @@ namespace Numbers_Mobile.Resources {
         public static string GenerationAndOutputPrompt {
             get {
                 return ResourceManager.GetString("GenerationAndOutputPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter &quot;exit&quot; to quit.\n\n.
+        /// </summary>
+        public static string InfoPrompt {
+            get {
+                return ResourceManager.GetString("InfoPrompt", resourceCulture);
             }
         }
         
@@ -286,7 +304,7 @@ namespace Numbers_Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version {version}\n\n.
+        ///   Looks up a localized string similar to Version {version}.
         /// </summary>
         public static string VersionPrompt {
             get {

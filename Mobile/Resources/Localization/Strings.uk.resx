@@ -199,6 +199,12 @@
     <value>Error: Se denegó el permiso para escribir en el almacenamiento.</value>
   </data>
   <data name="VersionPrompt" xml:space="preserve">
-    <value>Version {version}\n\n</value>
+    <value>Version {version}</value>
+  </data>
+  <data name="ExitPrompt" xml:space="preserve">
+    <value>\nЗакриваємо програму...</value>
+  </data>
+  <data name="InfoPrompt" xml:space="preserve">
+    <value>Введіть "exit", щоб вийти.\n\n</value>
   </data>
 </root>

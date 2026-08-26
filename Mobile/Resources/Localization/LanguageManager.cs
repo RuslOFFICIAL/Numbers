@@ -7,7 +7,12 @@ class LanguageManager
 {
     public static bool LoadSystemLanguage(string lang)
     {
-        switch (lang.ToLowerInvariant())
+		if (lang?.Trim().Equals("exit", StringComparison.OrdinalIgnoreCase) == true)
+		{
+			return false;
+		}
+
+		switch (lang?.ToLowerInvariant())
         {
             case "uk":
             case "en":

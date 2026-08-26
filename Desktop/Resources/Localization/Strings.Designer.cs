@@ -106,6 +106,15 @@ namespace Numbers_Desktop.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to \nExiting the program....
+        /// </summary>
+        internal static string ExitPrompt {
+            get {
+                return ResourceManager.GetString("ExitPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The file will be saved in: &quot;{targetDir}&quot;.
         /// </summary>
         internal static string FileDirectoryPrompt {
@@ -138,6 +147,15 @@ namespace Numbers_Desktop.Resources {
         internal static string GenerationAndOutputPrompt {
             get {
                 return ResourceManager.GetString("GenerationAndOutputPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter &quot;exit&quot; to quit.\n\n.
+        /// </summary>
+        internal static string InfoPrompt {
+            get {
+                return ResourceManager.GetString("InfoPrompt", resourceCulture);
             }
         }
         
@@ -259,7 +277,7 @@ namespace Numbers_Desktop.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {menuASCII}\nVersion {version}\n\n.
+        ///   Looks up a localized string similar to {menuASCII}\nVersion {version}.
         /// </summary>
         internal static string VersionPrompt {
             get {
