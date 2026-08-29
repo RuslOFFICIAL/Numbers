@@ -190,7 +190,7 @@
     <value>El número no es válido (debe estar en el rango 1 a {maxNumber:N0}). Intente de nuevo.</value>
   </data>
   <data name="InfoPrompt" xml:space="preserve">
-    <value>Ingrese "exit" para salir.\n\n</value>
+    <value>Escribe "exit" para salir.\n\n</value>
   </data>
   <data name="ExitPrompt" xml:space="preserve">
     <value>\nSaliendo del programa...</value>

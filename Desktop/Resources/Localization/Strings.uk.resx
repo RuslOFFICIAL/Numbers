@@ -193,6 +193,6 @@
     <value>Введіть "exit", щоб вийти.\n\n</value>
   </data>
   <data name="ExitPrompt" xml:space="preserve">
-    <value>\nЗакриваємо програму...</value>
+    <value>\nВихід з програми...</value>
   </data>
 </root>

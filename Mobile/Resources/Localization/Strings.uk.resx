@@ -202,7 +202,7 @@
     <value>Version {version}</value>
   </data>
   <data name="ExitPrompt" xml:space="preserve">
-    <value>\nЗакриваємо програму...</value>
+    <value>\nВихід з програми...</value>
   </data>
   <data name="InfoPrompt" xml:space="preserve">
     <value>Введіть "exit", щоб вийти.\n\n</value>
