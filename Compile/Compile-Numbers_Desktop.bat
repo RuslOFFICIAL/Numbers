@@ -51,6 +51,5 @@ echo Copied.
 goto End
 
 :End
-endlocal&echo.&echo Done!
-pause
-exit
+endlocal& echo.& echo Done!
+pause& exit

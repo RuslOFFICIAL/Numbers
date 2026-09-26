@@ -11,4 +11,4 @@ for %%f in ("%~dp0*.bat") do (
 
 REM End
 echo.&echo Done!
-pause
+pause& exit

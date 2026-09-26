@@ -44,7 +44,7 @@ dotnet publish -f net9.0-android -c Release -p:AndroidPackageFormat=apk ^
 	-p:AndroidSigningKeyAlias="%AndroidKeyAlias%" ^
 	-p:AndroidSigningKeyPass="%AndroidKeypass%" ^
 	-p:AndroidSigningStorePass="%AndroidStorepass%"
-echo.&echo Build complete.
+echo.& echo Build complete.
 
 REM Copy.
 echo.&echo Copying files...
@@ -70,5 +70,4 @@ goto End
 
 :End
 endlocal&echo.&echo Done!
-pause
-exit
+pause& exit
