@@ -30,12 +30,12 @@ cd /d %SourceDirectory%
 REM Run the publish command.
 echo Compiling Windows file...
 dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true
-echo.&echo Compiling Linux file...
+echo. & echo Compiling Linux file...
 dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true
-echo.&echo Build complete.
+echo. & echo Build complete.
 
 REM Copy.
-echo.&echo Copying files...
+echo. & echo Copying files...
 for %%f in ("%FileDirectoryWindows%\Numbers_*_Desktop-Windows.exe") do (
 	copy "%%f" "%DestinationDirectory%"
 )
@@ -51,5 +51,5 @@ echo Copied.
 goto End
 
 :End
-endlocal& echo.& echo Done!
-pause& exit
+endlocal & echo. & echo Done!
+pause & exit

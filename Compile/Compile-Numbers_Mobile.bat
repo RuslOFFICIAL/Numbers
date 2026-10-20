@@ -7,7 +7,7 @@ set "ConfigPath=%~dp0Mobile-Signature_Info.conf"
 
 if not exist "%ConfigPath%" (
 	endlocal
-	echo Error: Mobile-Signature_Info.conf not found!&echo Check if you have that file or follow the instruction in Mobile-Signature_Info.conf.example!
+	echo Error: Mobile-Signature_Info.conf not found! & echo Check if you have that file or follow the instruction in Mobile-Signature_Info.conf.example!
 	pause
 	exit /b
 )
@@ -44,10 +44,10 @@ dotnet publish -f net9.0-android -c Release -p:AndroidPackageFormat=apk ^
 	-p:AndroidSigningKeyAlias="%AndroidKeyAlias%" ^
 	-p:AndroidSigningKeyPass="%AndroidKeypass%" ^
 	-p:AndroidSigningStorePass="%AndroidStorepass%"
-echo.& echo Build complete.
+echo. & echo Build complete.
 
 REM Copy.
-echo.&echo Copying files...
+echo. & echo Copying files...
 REM Variables.
 for /f "tokens=*" %%i in ('powershell -Command "(Select-Xml -Path '%CsprojPath%' -XPath '//ApplicationDisplayVersion').Node.InnerText"') do (
 	set "AppVersion=%%i"
@@ -69,5 +69,5 @@ echo Copied.
 goto End
 
 :End
-endlocal&echo.&echo Done!
-pause& exit
+endlocal & echo. & echo Done!
+pause & exit
