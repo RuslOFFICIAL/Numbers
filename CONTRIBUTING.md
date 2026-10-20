@@ -31,12 +31,12 @@ Open an issue describing the problem you want to solve, your proposed solution, 
 
 1. Fork the repository and clone your fork:
 ```bash
-   git clone https://github.com/RuslOFFICIAL/Numbers.git
-   cd Numbers
+	git clone https://github.com/RuslOFFICIAL/Numbers.git
+	cd Numbers
 ```
 2. Create a branch:
 ```bash
-   git checkout -b feature/short-description
+	git checkout -b feature/short-description
 ```
 
 ## Making Changes
