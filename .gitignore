@@ -4,7 +4,7 @@ Releases/
 # Files.
 *.lnk
 *.conf
-
+temp*.cs
 
 
 ## Ignore Visual Studio temporary files, build results, and
