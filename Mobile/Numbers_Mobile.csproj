@@ -26,6 +26,10 @@
 		<AssemblyTitle>Numbers</AssemblyTitle>
 		<Authors>Rusl</Authors>
 		<Company><![CDATA[R&C]]></Company>
+
+		<CheckEolWorkloads>false</CheckEolWorkloads>
+   	 	<CheckEolTargetFramework>false</CheckEolTargetFramework>
+		<NoWarn>$(NoWarn);NETSDK1202</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
