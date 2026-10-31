@@ -15,8 +15,8 @@ namespace Numbers_Mobile
 {
     public partial class MainPage : ContentPage
     {
-		// Set variables
-		private readonly int maxNumber = 100000000; // Changing the value of maxNumber may affect the performance of the program! 
+        // Set variables
+        private readonly int maxNumber = 100000000; // Changing the value of maxNumber may affect the performance of the program! 
         private int chosenNumber;
         private int methodNumber;
         private bool awaitingMethod = true;
@@ -31,8 +31,8 @@ namespace Numbers_Mobile
 
             InitializeComponent();
 
-			// Set variables.
-			var attributes = Assembly.GetExecutingAssembly()
+            // Set variables.
+            var attributes = Assembly.GetExecutingAssembly()
                 .GetCustomAttributes<AssemblyMetadataAttribute>()
                 .ToDictionary(a => a.Key, a => a.Value);
             var versionNumber = attributes.GetValueOrDefault("ApplicationDisplayVersion", "Unknown");
@@ -52,12 +52,12 @@ namespace Numbers_Mobile
             WriteLine(Strings.VersionPrompt.Replace("{version}", version));
             WriteLine(Strings.InfoPrompt.Replace("\\n", Environment.NewLine));
 
-			WriteLine(Strings.LanguageOptionsPrompt
+            WriteLine(Strings.LanguageOptionsPrompt
                 .Replace("\\n", Environment.NewLine)
                 .Replace("\\t", Constants.ConsoleTab));
-			WriteLine(Strings.LanguagePrompt);
-		}
-		private void WriteLine(string text)
+            WriteLine(Strings.LanguagePrompt);
+        }
+        private void WriteLine(string text)
         {
             //Console.WriteLine() command.
             MainThread.BeginInvokeOnMainThread(() =>
@@ -81,12 +81,12 @@ namespace Numbers_Mobile
         {
             // User input.
             string userInput = TerminalInput.Text?.Trim() ?? "";
-			CheckExit(userInput);
+            CheckExit(userInput);
 
-			TerminalInput.Text = string.Empty;
+            TerminalInput.Text = string.Empty;
             WriteInline($"> {userInput}\n");
 
-			if (awaitingLang)
+            if (awaitingLang)
             {
                 // Lang.
                 bool isSupported = LanguageManager.LoadSystemLanguage(userInput);
@@ -142,21 +142,21 @@ namespace Numbers_Mobile
 
             // Other processes.
             await ProcessNumbersAsync(chosenNumber, methodNumber);
-			GetSeparator();
-			await CreateFileAsync(chosenNumber, methodNumber);
+            GetSeparator();
+            await CreateFileAsync(chosenNumber, methodNumber);
 
             // Next cycle.
             awaitingLang = true;
             awaitingMethod = true;
 
-			// Text.
-			WriteLine(Strings.NewCyclePrompt.Replace("\\n", Environment.NewLine));
-			WriteLine(Strings.LanguageOptionsPrompt
+            // Text.
+            WriteLine(Strings.NewCyclePrompt.Replace("\\n", Environment.NewLine));
+            WriteLine(Strings.LanguageOptionsPrompt
                 .Replace("\\n", Environment.NewLine)
                 .Replace("\\t", Constants.ConsoleTab));
-			WriteLine(Strings.LanguagePrompt);
+            WriteLine(Strings.LanguagePrompt);
 
-			TerminalInput.IsEnabled = true;
+            TerminalInput.IsEnabled = true;
         }
 
         private async Task ProcessNumbersAsync(int chosenNumber, int methodNumber)
@@ -177,21 +177,21 @@ namespace Numbers_Mobile
                 StringBuilder sb = new();
                 int bufferedStreamSize = 1048576; // 1 MB.
                 int displayLimit = 10000; // Only show first #### numbers in UI.
-				int count = 0;
-				bool isTruncated = false;
+                int count = 0;
+                bool isTruncated = false;
 
-				switch (methodNumber)
+                switch (methodNumber)
                 {
                     case 1: // Ascending.
-                        for (int i = 1; i <= chosenNumber;  i++)
+                        for (int i = 1; i <= chosenNumber; i++)
                         {
-							if (count > displayLimit)
+                            if (count > displayLimit)
                             {
-								FlushToUI(sb.ToString());
-								WriteLine(Strings.OutputTruncatedPrompt);
-								sb.Clear();
-								return;
-							}
+                                FlushToUI(sb.ToString());
+                                WriteLine(Strings.OutputTruncatedPrompt);
+                                sb.Clear();
+                                return;
+                            }
 
                             sb.Append(i).Append(i == chosenNumber ? "" : " ");
                             count++;
@@ -201,25 +201,25 @@ namespace Numbers_Mobile
                                 sb.Clear();
                             }
                         }
-						break;
+                        break;
                     case 2: // Descending.
-						for (int i = chosenNumber; i >= 1; i--)
+                        for (int i = chosenNumber; i >= 1; i--)
                         {
                             if (count > displayLimit)
                             {
                                 FlushToUI(sb.ToString());
                                 WriteLine(Strings.OutputTruncatedPrompt);
                                 sb.Clear();
-								isTruncated = true;
-								return;
+                                isTruncated = true;
+                                return;
                             }
-                            
+
                             sb.Append(i).Append(i == 1 ? "" : " ");
                             count++;
                             if (sb.Length > bufferedStreamSize)
                             {
-                                 FlushToUI(sb.ToString());
-                                 sb.Clear();
+                                FlushToUI(sb.ToString());
+                                sb.Clear();
                             }
                         }
                         break;
@@ -266,8 +266,8 @@ namespace Numbers_Mobile
                     switch (methodNumber)
                     {
                         case 1: // Ascending.
-							fileMemory.Span[filePos++] = (byte)'1';
-							for (int i = 2; i <= chosenNumber; i++)
+                            fileMemory.Span[filePos++] = (byte)'1';
+                            for (int i = 2; i <= chosenNumber; i++)
                             {
                                 if (filePos >= actualLength - fileMargin)
                                 {
@@ -335,8 +335,8 @@ namespace Numbers_Mobile
         private async Task CreateFileAsync(int chosenNumber, int methodNumber)
         {
 
-			// Set variables.
-			string timestamp = DateTime.Now.ToString("dd-MM-yyyy_HH-mm-ss");
+            // Set variables.
+            string timestamp = DateTime.Now.ToString("dd-MM-yyyy_HH-mm-ss");
             string targetDir = "/storage/emulated/0/R&C/Numbers/";
             string fileName = methodNumber switch
             {
@@ -351,7 +351,7 @@ namespace Numbers_Mobile
             double fileSizeInMB = fileSizeInBytes / (1024.0 * 1024.0);
 
             // Choice.
-            bool shouldSave = await DisplayAlert
+            bool shouldSave = await DisplayAlertAsync
                 (Strings.SaveFilePrompt,
                 Strings.FileSizePrompt
                     .Replace("{fileSizeInBytes:N0}", fileSizeInBytes.ToString("N0"))
@@ -369,7 +369,7 @@ namespace Numbers_Mobile
                         WriteLine(Strings.CreatingDirectoryPrompt
                             .Replace("{targetDir}", targetDir)
                             .Replace("\\n", Environment.NewLine));
-                        
+
                         // Permission check.
                         var status = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
                         if (status != PermissionStatus.Granted)
@@ -408,29 +408,29 @@ namespace Numbers_Mobile
         private void GetSeparator()
         {
             // Get screen width
-			var mainDisplayInfo = DeviceDisplay.Current.MainDisplayInfo;
-			double widthInUnits = mainDisplayInfo.Width / mainDisplayInfo.Density;
-			int characterCount = (int)((widthInUnits - 20) / 5.0);
+            var mainDisplayInfo = DeviceDisplay.Current.MainDisplayInfo;
+            double widthInUnits = mainDisplayInfo.Width / mainDisplayInfo.Density;
+            int characterCount = (int)((widthInUnits - 20) / 5.0);
 
-			// Print the separator.
-			string separator = new('-', characterCount);
+            // Print the separator.
+            string separator = new('-', characterCount);
             WriteLine(separator);
-		}
+        }
 
-		private void CheckExit(string? input)
-		{
-			if (input?.Trim().Equals("exit", StringComparison.OrdinalIgnoreCase) == true)
-			{
-				WriteLine(Strings.ExitPrompt.Replace("\\n", Environment.NewLine));
-				Microsoft.Maui.Controls.Application.Current?.Quit();
-			}
-		}
-	}
+        private void CheckExit(string? input)
+        {
+            if (input?.Trim().Equals("exit", StringComparison.OrdinalIgnoreCase) == true)
+            {
+                WriteLine(Strings.ExitPrompt.Replace("\\n", Environment.NewLine));
+                Microsoft.Maui.Controls.Application.Current?.Quit();
+            }
+        }
+    }
 
-	public static class Constants
-	{
-		public const string ConsoleTab = "\t";
-	}
+    public static class Constants
+    {
+        public const string ConsoleTab = "\t";
+    }
 }
 
 // All ASCII arts are from https://patorjk.com/software/taag/#p=display&f=Graffiti&t=N+++u+++m+++b+++e+++r+++s&x=none&v=4&h=4&w=80&we=false
