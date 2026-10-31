@@ -15,9 +15,9 @@
 		<PlatformString>Mobile</PlatformString>
 
 		<!--- Change the version of the program only here! <ApplicationVersion> always has to be changed by 1! <VersionOnly> have to be either 1 (as true) or 0 (as false)! -->
-		<ApplicationDisplayVersion>6.4.2</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>6.5.0</ApplicationDisplayVersion>
 		<Version>$(ApplicationDisplayVersion)</Version>
-		<ApplicationVersion>21</ApplicationVersion>
+		<ApplicationVersion>22</ApplicationVersion>
 		<VersionOnly>0</VersionOnly>
 		<NeutralLanguage>en-US</NeutralLanguage>
 
@@ -70,7 +70,7 @@
 		
 	
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android</TargetFrameworks>
+		<TargetFrameworks>net10.0-android</TargetFrameworks>
 		<AndroidPackageFormat>apk</AndroidPackageFormat>
 		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 		<LangVersion>13.0</LangVersion>
@@ -116,9 +116,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
