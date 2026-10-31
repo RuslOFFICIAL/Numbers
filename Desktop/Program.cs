@@ -32,7 +32,6 @@ namespace Numbers_Desktop
             var versionOnly = attributes.GetValueOrDefault("VersionOnly", "Unknown");
             var platform = attributes.GetValueOrDefault("PlatformString", "Unknown");
 
-
             // Version.
             string versionOnlyString = versionOnly switch
             {
@@ -59,39 +58,39 @@ namespace Numbers_Desktop
 
                 // Method.
                 Console.Write(Strings.MethodChoicePrompt.Replace("\\n", Environment.NewLine));
-				string? methodInput;
-				while (true)
-				{
-					methodInput = Console.ReadLine();
-					CheckExit(methodInput);
-					if (int.TryParse(methodInput, out methodNumber) && methodNumber >= 1 && methodNumber <= 2)
-					{
-						break;
-					}
-					Console.Write(Strings.MethodChoiceWrongPrompt.Replace("\\n", Environment.NewLine));
-				}
+                string? methodInput;
+                while (true)
+                {
+                    methodInput = Console.ReadLine();
+                    CheckExit(methodInput);
+                    if (int.TryParse(methodInput, out methodNumber) && methodNumber >= 1 && methodNumber <= 2)
+                    {
+                        break;
+                    }
+                    Console.Write(Strings.MethodChoiceWrongPrompt.Replace("\\n", Environment.NewLine));
+                }
 
-				// Insert number.
-				Console.Write(Strings.EnterNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
-				string? numberInput;
-				while (true)
-				{
-					numberInput = Console.ReadLine();
-					CheckExit(numberInput);
-					if (int.TryParse(numberInput, out chosenNumber) && chosenNumber >= 1 && chosenNumber <= maxNumber)
-					{
-						break;
-					}
-					Console.WriteLine(Strings.WrongNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
-					Console.Write(Strings.EnterNumberAgainPrompt);
-				}
+                // Insert number.
+                Console.Write(Strings.EnterNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
+                string? numberInput;
+                while (true)
+                {
+                    numberInput = Console.ReadLine();
+                    CheckExit(numberInput);
+                    if (int.TryParse(numberInput, out chosenNumber) && chosenNumber >= 1 && chosenNumber <= maxNumber)
+                    {
+                        break;
+                    }
+                    Console.WriteLine(Strings.WrongNumberPrompt.Replace("{maxNumber:N0}", maxNumber.ToString("N0")));
+                    Console.Write(Strings.EnterNumberAgainPrompt);
+                }
 
-				// Launching other processes.
-				await ProcessNumbersAsync(chosenNumber, methodNumber);
+                // Launching other processes.
+                await ProcessNumbersAsync(chosenNumber, methodNumber);
                 await CreateFileAsync(chosenNumber, methodNumber);
 
-				// New cycle.
-				Console.WriteLine(Strings.NewCyclePrompt.Replace("\\n", Environment.NewLine));
+                // New cycle.
+                Console.WriteLine(Strings.NewCyclePrompt.Replace("\\n", Environment.NewLine));
             }
         }
 
@@ -103,27 +102,27 @@ namespace Numbers_Desktop
             int bufferedStreamSize = 1048576; // 1 MB.
             int arrayPoolSize = 65536; // 64 KB.
             int displayLimit = 10000; // Only show first #### numbers in UI.
-			int count = 0;
-			bool isTruncated = false;
-			await Task.Run(() =>
+            int count = 0;
+            bool isTruncated = false;
+            await Task.Run(() =>
             {
-				using Stream rawStdout = Console.OpenStandardOutput();
+                using Stream rawStdout = Console.OpenStandardOutput();
                 using BufferedStream stdout = new(rawStdout, bufferedStreamSize);
                 {
-					byte[] pooledBuffer = ArrayPool<byte>.Shared.Rent(arrayPoolSize);
+                    byte[] pooledBuffer = ArrayPool<byte>.Shared.Rent(arrayPoolSize);
                     try
                     {
                         Span<byte> consoleSpan = pooledBuffer.AsSpan();
                         int actualLength = consoleSpan.Length;
                         int consolePos = 0;
-						int bytesWritten;
+                        int bytesWritten;
                         const byte spaceByte = (byte)' ';
 
-                        switch(methodNumber)
+                        switch (methodNumber)
                         {
                             case 1: // Ascending
-								consoleSpan[consolePos++] = (byte)'1';
-								for (int i = 2; i <= chosenNumber; i++)
+                                consoleSpan[consolePos++] = (byte)'1';
+                                for (int i = 2; i <= chosenNumber; i++)
                                 {
                                     if (count > displayLimit)
                                     {
@@ -148,20 +147,20 @@ namespace Numbers_Desktop
 
                                 for (int i = chosenNumber - 1; i >= 1; i--)
                                 {
-									if (count > displayLimit)
-									{
-										stdout.Write(consoleSpan[..consolePos]);
-										consolePos = 0;
-										byte[] msg = Encoding.UTF8.GetBytes(Strings.OutputTruncatedPrompt);
-										stdout.Write(msg);
-										isTruncated = true;
-										return;
-									}
+                                    if (count > displayLimit)
+                                    {
+                                        stdout.Write(consoleSpan[..consolePos]);
+                                        consolePos = 0;
+                                        byte[] msg = Encoding.UTF8.GetBytes(Strings.OutputTruncatedPrompt);
+                                        stdout.Write(msg);
+                                        isTruncated = true;
+                                        return;
+                                    }
 
-									stdout.Write(consoleSpan[..consolePos]);
+                                    stdout.Write(consoleSpan[..consolePos]);
                                     count++;
                                     consolePos = 0;
-                         
+
                                     consoleSpan[consolePos++] = spaceByte;
                                     Utf8Formatter.TryFormat(i, consoleSpan[consolePos..], out bytesWritten);
                                     consolePos += bytesWritten;
@@ -217,8 +216,8 @@ namespace Numbers_Desktop
                     switch (methodNumber)
                     {
                         case 1: // Ascending.
-							fileMemory.Span[filePos++] = (byte)'1';
-							for (int i = 2; i <= chosenNumber; i++)
+                            fileMemory.Span[filePos++] = (byte)'1';
+                            for (int i = 2; i <= chosenNumber; i++)
                             {
                                 if (filePos >= actualLength - fileMargin)
                                 {
@@ -249,7 +248,7 @@ namespace Numbers_Desktop
                             }
                             break;
                     }
-                    
+
                     if (filePos > 0)
                     {
                         await fs.WriteAsync(fileMemory[..filePos]);
@@ -319,12 +318,12 @@ namespace Numbers_Desktop
             Console.WriteLine(Strings.SaveFileOptionsPrompt.Replace("\\n", Environment.NewLine));
 
             Console.Write(Strings.SaveFileChoicePrompt.Replace("{fileName}", fileName));
-			string fileResponse = Console.ReadLine() ?? "";
-			CheckExit(fileResponse);
-			fileResponse = fileResponse.Trim().ToLower();
+            string fileResponse = Console.ReadLine() ?? "";
+            CheckExit(fileResponse);
+            fileResponse = fileResponse.Trim().ToLower();
 
-			// Choice.
-			if (fileResponse == "y" || fileResponse == "yes")
+            // Choice.
+            if (fileResponse == "y" || fileResponse == "yes")
             {
                 // Creating directory and file.
                 try
@@ -352,15 +351,15 @@ namespace Numbers_Desktop
             }
         }
 
-		private static void CheckExit(string? input)
-		{
-			if (input?.Trim().Equals("exit", StringComparison.OrdinalIgnoreCase) == true)
-			{
+        private static void CheckExit(string? input)
+        {
+            if (input?.Trim().Equals("exit", StringComparison.OrdinalIgnoreCase) == true)
+            {
                 Console.WriteLine(Strings.ExitPrompt.Replace("\\n", Environment.NewLine));
-				Environment.Exit(0);
-			}
-		}
-	}
+                Environment.Exit(0);
+            }
+        }
+    }
 }
 
 // All ASCII arts are from https://patorjk.com/software/taag/#p=display&f=Graffiti&t=N+u+m+b+e+r+s&x=none&v=4&h=4&w=80&we=false
