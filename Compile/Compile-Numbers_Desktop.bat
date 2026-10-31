@@ -5,8 +5,8 @@ setlocal enabledelayedexpansion
 REM Variables.
 set "SourceDirectory=%~dp0..\Desktop"
 set "DestinationDirectory=%~dp0..\Releases"
-set "FileDirectoryWindows=%SourceDirectory%\bin\Release\net9.0\win-x64\publish"
-set "FileDirectoryLinux=%SourceDirectory%\bin\Release\net9.0\linux-x64\publish"
+set "FileDirectoryWindows=%SourceDirectory%\bin\Release\net10.0\win-x64\publish"
+set "FileDirectoryLinux=%SourceDirectory%\bin\Release\net10.0\linux-x64\publish"
 
 REM Removing other EXE files.
 echo Deleting old EXE files...

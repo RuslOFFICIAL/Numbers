@@ -17,7 +17,7 @@ for /f "usebackq eol=# tokens=1,2 delims==" %%A in ("%ConfigPath%") do set "%%A=
 REM Variables.
 set "SourceDirectory=%~dp0..\Mobile"
 set "DestinationDirectory=%~dp0..\Releases"
-set "FileDirectoryAndroid=%SourceDirectory%\bin\Release\net9.0-android\publish"
+set "FileDirectoryAndroid=%SourceDirectory%\bin\Release\net10.0-android\publish"
 set "CsprojPath=%SourceDirectory%\Numbers_Mobile.csproj"
 
 for /f "usebackq tokens=1,2 delims==" %%a in ("%AndroidSignatureInfoPath%") do set "%%a=%%~b"
@@ -39,7 +39,7 @@ cd /d %SourceDirectory%
 
 REM Run the publish command.
 echo Compiling Android APK...
-dotnet publish -f net9.0-android -c Release -p:AndroidPackageFormat=apk ^
+dotnet publish -f net10.0-android -c Release -p:AndroidPackageFormat=apk ^
 	-p:AndroidSigningKeyStore="%AndroidKeystorePath%" ^
 	-p:AndroidSigningKeyAlias="%AndroidKeyAlias%" ^
 	-p:AndroidSigningKeyPass="%AndroidKeypass%" ^
