@@ -7,7 +7,7 @@ set "ConfigPath=%~dp0Mobile-Signature_Info.conf"
 
 if not exist "%ConfigPath%" (
 	endlocal
-	echo Error: Mobile-Signature_Info.conf not found! & echo Check if you have that file or follow the instruction in Mobile-Signature_Info.conf.example!
+	echo Error: Mobile-Signature_Info.conf not found! & echo Check if there is that file or follow the instruction in Mobile-Signature_Info.conf.example!
 	pause
 	exit /b
 )
